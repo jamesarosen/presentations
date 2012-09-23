@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=1024, user-scalable=no">
+
+    <title>Carson - Adventures with Engines</title>
+
+    <link rel="stylesheet" href="core/deck.core.css">
+    <link rel="stylesheet" href="extensions/status/deck.status.css">
+    <link rel="stylesheet" href="extensions/hash/deck.hash.css">
+    <link rel="stylesheet" href="extensions/scale/deck.scale.css">
+    <link rel="stylesheet" href="themes/transition/vertical-slide.css">
+    <link rel="stylesheet" href="themes/style/zendesk.css">
+
+    <script src="modernizr.custom.js"></script>
+  </head>
+  <body class="deck-container">
+    <!-- slides -->
+    <section class="slide">
+      <blockquote>
+        <p>Here's an awesome quote"</p>
+        <cite>John Doe</cite>
+      </blockquote>
+    </section>
+
+    <section class="slide chapter green">
+      <span class='badge orange'>HIGHLY CONFIDENTIAL</span>
+      <h1>Chapter 1</h1>
+    </section>
+
+    <section class="slide">
+      <h1>Content</h1>
+    </section>
+
+    <section class="slide chapter">
+      <header>EXAMPLE OF BODY COPY SLIDE</header>
+      <h1>Chapter 2</h1>
+    </section>
+
+    <!-- deck.status snippet -->
+    <p class="deck-status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.hash snippet -->
+    <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+    <!-- Required JS files. -->
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="core/deck.core.js"></script>
+
+    <!-- Extension JS files. Add or remove as needed. -->
+    <script src="extensions/hash/deck.hash.js"></script>
+    <script src="extensions/status/deck.status.js"></script>
+    <script src="extensions/scale/deck.scale.js"></script>
+
+    <!-- Initialize the deck. You can put this in an external file if desired. -->
+    <script>
+      $(function() {
+        $(document).bind('deck.beforeInit', function() {
+          $('.slide')
+            .not('.chapter.green')
+            .not('.buddhy')
+              .each(function() {
+                if ( $(this).find('header').length === 0 ) {
+                  $(this).prepend('<header />');
+                }
+              });
+        });
+
+        $.deck('.slide');
+      });
+    </script>
+  </body>
+</html>
