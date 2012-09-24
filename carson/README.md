@@ -75,3 +75,4 @@ level, "we're going to add many more Rails processes soon."
  * Image Credits
    * [Zaphod Lego](http://www.flickr.com/photos/bladewood/2839103821/)
    * [Stressed Eggs](http://www.flickr.com/photos/topgold/6273248505/)
+   * [Cat Meeting](http://cheezburger.com/5833564416)
