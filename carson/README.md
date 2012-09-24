@@ -74,3 +74,4 @@ level, "we're going to add lots more in the near future."
    * http://github.com/homoiconic/blob/master/2011/11/COMEFROM.md
  * Image Credits
    * [Zaphod Lego](http://www.flickr.com/photos/bladewood/2839103821/)
+   * [Stressed Eggs](http://www.flickr.com/photos/topgold/6273248505/)
