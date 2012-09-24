@@ -137,7 +137,8 @@ $zendesk-green: #78A300;
   }
 
   .deck-status {
-    font-size:0.6666em;
+    bottom: 15px;
+    right: 15px;
   }
 
   &.deck-menu {
@@ -154,4 +155,3 @@ $zendesk-green: #78A300;
 .csstransitions.csstransforms .deck-container:not(.deck-menu) > .slide {
   padding: 10px 35px;
 }
-
