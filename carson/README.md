@@ -9,6 +9,12 @@ eating frozen radio dinners." -Johnny Carson
 
 ## Introduction
 
+Zendesk was born five years ago as a fairly standard Rails 1.2 application. In
+that time, we've upgraded Rails many times and added Resque, Sphinx, Solr,
+ejabberd, Node.js, and other non-Rails services. Until very recently, though,
+all of the Rails code was in one project and one runtime. This is the story
+of how that has begun to change.
+
 One morning, I walked up to our head of infrastructure, whom we'll call
 "Zaphod" because *how cool would that be?*, and asked, "Hey, Zaphod. We're getting
 close to the point where we want to start deploying Zendesk Apps. What do I
@@ -22,6 +28,9 @@ To which I responded, "But Zaphod, this is the way of the future. Service-
 oriented architectures! The single-responsibility principle! Plus," and it's at
 this point that I might have miscalculated how I was affecting Zaphod's stress
 level, "we're going to add many more Rails processes soon."
+
+Meetings were held. Coffee was drunk. And after some debate, we agreed on
+going from one to two sets of Rails runtimes, but no more.
 
 
 
