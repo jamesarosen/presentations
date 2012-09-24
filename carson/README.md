@@ -7,6 +7,24 @@ eating frozen radio dinners." -Johnny Carson
 
 "I did not know that." -Johnny Carson
 
+## Introduction
+
+One morning, I walked up to our head of infrastructure, whom we'll call
+"Zaphod" because *how cool would that be?*, and asked, "Hey, Zaphod. We're getting
+close to the point where we want to start deployin Zendesk Apps. What do I
+need to do to get a Rails 3 instance running in production?"
+
+Zaphod looked at me like I had exactly the wrong number of heads. "Rails 3?
+We're not prepared to provision and scale an entirely separate set of
+runtimes."
+
+To which I responded, "But Zaphod, this is the way of the future. Service-
+oriented architectures! The single-responsibility principle! Plus," and it's at
+this point that I might have miscalculated how I was affecting Zaphod's stress
+level, "we're going to add lots more in the near future."
+
+
+
  * Rationale
    * Faster tests
    * Better isolation between teams
@@ -54,3 +72,5 @@ eating frozen radio dinners." -Johnny Carson
    * http://en.wikipedia.org/wiki/Conway's_Law
    * http://thunderboltlabs.com/posts/soa-antipattern-centralized-db
    * http://github.com/homoiconic/blob/master/2011/11/COMEFROM.md
+ * Image Credits
+   * [Zaphod Lego](http://www.flickr.com/photos/bladewood/2839103821/)
