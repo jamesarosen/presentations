@@ -82,8 +82,11 @@ going from one to two sets of Rails runtimes, but no more.
    * http://en.wikipedia.org/wiki/Conway's_Law
    * http://thunderboltlabs.com/posts/soa-antipattern-centralized-db
    * http://github.com/homoiconic/blob/master/2011/11/COMEFROM.md
+   * http://confreaks.com/videos/1115-gogaruco2012-go-ahead-make-a-mess
+   * https://speakerdeck.com/u/skmetz/p/go-ahead-make-a-mess
  * Image Credits
    * [Zaphod Lego](http://www.flickr.com/photos/bladewood/2839103821/)
    * [Stressed Eggs](http://www.flickr.com/photos/topgold/6273248505/)
    * [Cat Meeting](http://cheezburger.com/5833564416)
    * [Bulleit](http://www.flickr.com/photos/9525555@N07/6071862938/)
+   * [Mess Graphs](https://speakerdeck.com/u/skmetz/p/go-ahead-make-a-mess)
