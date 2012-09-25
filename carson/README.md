@@ -76,7 +76,7 @@ going from one to two sets of Rails runtimes, but no more.
    * faster unit tests
    * need integration tests in container
  * Further reading
-   * http://github.com/jamesarosen/presentations/blob/carson/README.md
+   * https://github.com/jamesarosen/presentations/tree/master/carson
    * http://www.slideshare.net/jackdanger/monorails-gogaruco-2012
    * http://en.wikipedia.org/wiki/Conway's_Law
    * http://thunderboltlabs.com/posts/soa-antipattern-centralized-db
