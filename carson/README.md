@@ -82,6 +82,20 @@ Thus, it's important that we have at least a few integration tests for each
 engine inside Carson. This ensures the engines don't step on one another's
 toes, at least in known ways.
 
+### Semantic Versioning
+
+Because engines are gems that use semantic versioning, their deploy schedules
+are decoupled. The version of each engine that gets deployed is fixed by
+Carson's `Gemfile.lock`, not by what's in that engine's `master` branch. That
+means that code doesn't linger in pull requests. If something can't go out yet,
+the team simply keeps their version locked.
+
+Of course, semantic versioning means that engines should be able to push patch
+relases easily. If you publish the engines to a gem server, that's as easy as
+running `bundle update my-engine` from the host application. If you don't,
+even a patch deploy becomes a tedious process of updating git tags in the
+`Gemfile`.
+
  * Rationale
    * Faster tests
    * Better isolation between teams
