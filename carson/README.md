@@ -68,8 +68,19 @@ Carson is a Rails 3.2 application, but it doesn't have any application code.
 The repository consists of deployment scripts, some configuration files,
 and a Gemfile. All feature work is done in engines.
 
+## Benefits and Drawbacks
 
+### Testing
 
+Developers work in an isolated environment. Test suites can run in under a
+minute and a single test can run in a second or two. Each engine has its
+own project on the CI server, so build failure notifications go to exactly
+the people who care.
+
+The downside is that the tests aren't really running in a real environment.
+Thus, it's important that we have at least a few integration tests for each
+engine inside Carson. This ensures the engines don't step on one another's
+toes, at least in known ways.
 
  * Rationale
    * Faster tests
@@ -109,9 +120,6 @@ and a Gemfile. All feature work is done in engines.
      * /api/v*/prefix
      * /assets/prefix
    * Microwave to federate nginx configurations
- * Testing
-   * faster unit tests
-   * need integration tests in container
  * Further reading
    * https://github.com/jamesarosen/presentations/tree/master/carson
    * http://www.slideshare.net/jackdanger/monorails-gogaruco-2012
