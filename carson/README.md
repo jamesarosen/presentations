@@ -78,6 +78,7 @@ going from one to two sets of Rails runtimes, but no more.
  * Further reading
    * https://github.com/jamesarosen/presentations/tree/master/carson
    * http://www.slideshare.net/jackdanger/monorails-gogaruco-2012
+   * http://confreaks.com/videos/1125-gogaruco2012-mega-rails
    * http://en.wikipedia.org/wiki/Conway's_Law
    * http://thunderboltlabs.com/posts/soa-antipattern-centralized-db
    * http://github.com/homoiconic/blob/master/2011/11/COMEFROM.md
