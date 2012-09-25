@@ -35,7 +35,7 @@ system. This is a Rails 2 engine that plugged into our existing infrastructure.
 Sea Monster is a very standard Rails application, so it fit nicely in
 that architecture.
 
-The next project, however, wasn't quite as nice a fit. Zendesk Apps was to
+A later project, however, wasn't quite as nice a fit. Zendesk Apps was to
 be an API back-end plus a ton of JavaScript, and Rails 2 doesn't give you
 much support for assets from engines. (For those who haven't tried, it involves
 running a `rake` task to import the assets into the app's `public/` folder
@@ -59,7 +59,15 @@ this point that I might have miscalculated how I was affecting Zaphod's stress
 level, "we're going to add many more Rails processes soon."
 
 Meetings were held. Coffee was drunk. And after some debate, we agreed on
-going from one to two sets of Rails runtimes, but no more.
+going from one to two sets of Rails runtimes, but no more. Thus was born
+Carson.
+
+## What
+
+Carson is a Rails 3.2 application, but it doesn't have any application code.
+The repository consists of deployment scripts, some configuration files,
+and a Gemfile. All feature work is done in engines.
+
 
 
 
