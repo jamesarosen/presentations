@@ -16,9 +16,9 @@ all of the Rails code was in one project and one runtime. This is the story
 of how that has begun to change.
 
 One morning, I walked up to our head of infrastructure, whom we'll call
-"Zaphod" because *how cool would that be?*, and asked, "Hey, Zaphod. We're getting
-close to the point where we want to start deploying Zendesk Apps. What do I
-need to do to get a Rails 3 instance running in production?"
+"Zaphod" and asked, "Hey, Zaphod. We're getting close to the point where we
+want to start deploying Zendesk Apps. What do I need to do to get a Rails 3
+instance running in production?"
 
 Zaphod looked at me like I had exactly the wrong number of heads. "Rails 3?
 We're not prepared to provision, monitor, and scale an entirely separate set of
