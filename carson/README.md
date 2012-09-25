@@ -15,10 +15,39 @@ ejabberd, Node.js, and other non-Rails services. Until very recently, though,
 all of the Rails code was in one project and one runtime. This is the story
 of how that has begun to change.
 
-One morning, I walked up to our head of infrastructure, whom we'll call
-"Zaphod" and asked, "Hey, Zaphod. We're getting close to the point where we
-want to start deploying Zendesk Apps. What do I need to do to get a Rails 3
-instance running in production?"
+Over the years, Zendesks's main Rails application grew... a lot. Fortunately,
+we had great engineers who ensured our test suite grew along with the app.
+Unfortunately, this meant that our test suite got slow. *Really* slow. By
+the Fall of 2011 (four years in), we were lucky if it ran in an hour.
+"No worries," some say; "run the whole thing in CI and only run the few tests
+you care about in development." Just booting the environment for a single
+test took a minute. That really hurts the test-code cycle.
+
+One thing we tried -- and I encourage everyone to do -- was break some tests
+out to a "fast test suite." Corey Haines has a
+[great talk](https://www.youtube.com/watch?v=bNn6M2vqxHE) about making your
+tests fast, and it all rests on getting rid of slow dependencies (like Rails)
+when running tests. We started this, but it wasn't enough. We really needed
+to develop new features in separate codebases.
+
+One of the first such ventures was "Sea Monster," our content-management
+system. This is a Rails 2 engine that plugged into our existing infrastructure.
+Sea Monster is a very standard Rails application, so it fit nicely in
+that architecture.
+
+The next project, however, wasn't quite as nice a fit. Zendesk Apps was to
+be an API back-end plus a ton of JavaScript, and Rails 2 doesn't give you
+much support for assets from engines. (For those who haven't tried, it involves
+running a `rake` task to import the assets into the app's `public/` folder
+and then making sure those assets are in your asset compiler.) Rails 3's
+asset pipeline (a.k.a. [Sprockets](https://github.com/sstephenson/sprockets))
+does this much better. Thus, we decided it was time to start developing a
+Rails 3 application.
+
+One morning after we had proven the Zendesk Apps concept, I walked up to our
+head of infrastructure, whom we'll call "Zaphod" and asked, "Hey, Zaphod. We're
+getting close to the point where we want to start deploying Zendesk Apps. What
+do I need to do to get a Rails 3 instance running in production?"
 
 Zaphod looked at me like I had exactly the wrong number of heads. "Rails 3?
 We're not prepared to provision, monitor, and scale an entirely separate set of
