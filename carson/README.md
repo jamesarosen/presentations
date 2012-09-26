@@ -80,7 +80,9 @@ Carson.
 
 Carson is a Rails 3.2 application, but it doesn't have any application code.
 The repository consists of deployment scripts, some configuration files,
-and a Gemfile. All feature work is done in engines.
+and a Gemfile. All feature work is done in engines. Cross-cutting concerns
+like text manipulation or locale lookup go in non-engine gems on which the
+engines depend.
 
 ## Benefits and Drawbacks
 
