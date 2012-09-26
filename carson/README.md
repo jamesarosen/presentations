@@ -23,6 +23,11 @@ the Fall of 2011 (four years in), we were lucky if it ran in an hour.
 you care about in development." Just booting the environment for a single
 test took a minute. That really hurts the test-code cycle.
 
+When tests are painful, you can either change the tests or change the code.
+Adding something like Spork is a change to the test; it might make working on
+the project better for a while, but it's just hiding the real problem: there's
+something wrong with the code.
+
 One thing we tried -- and I encourage everyone to do -- was break some tests
 out to a "fast test suite." Corey Haines has a
 [great talk](https://www.youtube.com/watch?v=bNn6M2vqxHE) about making your
