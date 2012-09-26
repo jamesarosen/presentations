@@ -112,6 +112,25 @@ running `bundle update my-engine` from the host application. If you don't,
 even a patch deploy becomes a tedious process of updating git tags in the
 `Gemfile`.
 
+### Global State
+
+Rails applications have a great deal of global state. Some examples include
+`I18n.locale`, `I18n.backend`, the set of translations, the list of Rack
+middleware, and the MIME type mappings. Any time an engine changes this global
+state, it risks breaking all the other engines. For example, we had a problem
+where one engine setting `I18n.backend` to a backend that first checked our
+central translation service and then fell back on that engine's
+`config/locales/*.yml` files. This caused all the other engines to lose their
+default translations.
+
+Instead, your teams should agree on some convention, encode that convention
+as a gem, and load the gem in the host environment. The engines can also load
+it in their test environments. In the `I18n.backend` case, our convention was
+that the backend would check the translation server first, then fall back on
+all of the engines' `config/locales/*.yml` files. We encoded that as a public
+method in our `zendesk_i18n` gem and called that method in an initializer in
+Carson.
+
  * Rationale
    * Faster tests
    * Better isolation between teams
