@@ -35,10 +35,19 @@ tests fast, and it all rests on getting rid of slow dependencies (like Rails)
 when running tests. We started this, but it wasn't enough. We really needed
 to develop new features in separate codebases.
 
-One of the first such ventures was "Sea Monster," our content-management
-system. This is a Rails 2 engine that plugged into our existing infrastructure.
-Sea Monster is a very standard Rails application, so it fit nicely in
-that architecture.
+[Conway's Law](http://en.wikipedia.org/wiki/Conway's_Law) states that
+
+> Organizations which design systems... are constrained to produce designs
+> which are copies of the communication structures of these organizations.
+
+This is probably the single most important point here. If you want to move to
+a service-oriented architecture, you *must* break your team up into smaller
+groups.
+
+One of the first ventures into building features in separate projects was
+"Sea Monster," our content-management system. This is a Rails 2 engine that
+plugged into our existing infrastructure. Sea Monster is a very standard Rails
+application, so it fit nicely in that architecture.
 
 A later project, however, wasn't quite as nice a fit. Zendesk Apps was to
 be an API back-end plus a ton of JavaScript, and Rails 2 doesn't give you
