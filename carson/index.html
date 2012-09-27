@@ -475,7 +475,7 @@ end</pre>
     </section>
 
     <section class='slide'>
-      <header>Copies of Model Classes</header>
+      <header>OK: Copies of Model Classes</header>
       <pre>
 class Commenting::Author
   self.table_name = 'people'
@@ -502,7 +502,7 @@ end</pre>
     </section>
 
     <section class='slide'>
-      <header>APIs Return Immutable Objects</header>
+      <header>Better: Ruby APIs</header>
       <pre>
 class People::Person &lt; ActiveRecord::Base
   def self.lookup(id)
@@ -541,6 +541,21 @@ class People::Person # not &lt; ActiveRecord::Base
     new( MultiJson.decode( json ) )
   end
 end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Best: Client Gem</header>
+      <ul>
+        <li class='slide incremental'>
+          Each feature that has clients builds a consumer gem
+        </li>
+        <li class='slide incremental'>
+          + Semantic versioning
+        </li>
+        <li class='slide incremental'>
+          Build the client first!
+        </li>
+      </ul>
     </section>
 
     <section class="slide chapter green">
