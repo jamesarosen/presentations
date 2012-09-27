@@ -81,6 +81,11 @@ $zendesk-green: #78A300;
         background: rgb(195,81,22);
       }
     }
+
+    figure {
+      text-align: center;
+      figcaption { color: #888; font-size: 85%; }
+    }
   }
 
   > .slide {
