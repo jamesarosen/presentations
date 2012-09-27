@@ -469,6 +469,18 @@ end</pre>
     </section>
 
     <section class='slide'>
+      <header>Danger!</header>
+      <pre class='slide incremental'>
+      People::Person.class_eval do
+        validates_presence_of :email
+      end</pre>
+      <pre class='slide incremental'>
+      People::Person.class_eval do
+        before_save :something_that_could_fail
+      end</pre>
+    </section>
+
+    <section class='slide'>
       <h2>
         If it's not your data and it's not your code, you can't change it.
       </h2>
