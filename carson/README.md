@@ -294,3 +294,4 @@ with a version that makes an HTTP call and you can separate the services.
    * [Sad Pumpkin](http://www.flickr.com/photos/nathaninsandiego/4061850729/)
    * [Corey with Cat](http://twitpic.com/ashs8m/full)
    * [Sprocket](http://www.flickr.com/photos/amberandclint/4215036529/)
+   * [Reg Braithwaite](http://hyfen.net/stackoverflow-devdays)

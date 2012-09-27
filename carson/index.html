@@ -310,6 +310,125 @@ end</pre>
       <h1>Takeaway:<br />Beware global state</h1>
     </section>
 
+    <section class='slide chapter'>
+      <h1>Antipattern: Shared, Mutable Objects</h1>
+    </section>
+
+    <section class="slide">
+      <header>Williams, Master of <code>COMEFROM</code></header>
+      <figure>
+        <img src='assets/reg_braithwaite.jpg' class='full' />
+        <figcaption>http://hyfen.net/stackoverflow-devdays</figcaption>
+      </figure>
+    </section>
+
+    <section class='slide'>
+      <header>Classic Rails App</header>
+      <pre>
+      class Person
+        has_many :comments
+      end
+
+      class Comment
+        belongs_to :person
+      end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Williams Rails App</header>
+      <pre>
+      class People::Person
+      end</pre>
+      <pre>
+      class Commenting::Comment
+        belongs_to :author, :class_name => 'People::Person'
+      end
+
+      People::Person.class_eval do
+        has_many :comments, :class_name => 'Commenting::Comment'
+      end</pre>
+    </section>
+
+    <section class='slide'>
+      <h2>
+        If it's not your data and it's not your code, you can't change it.
+      </h2>
+    </section>
+
+    <section class='slide'>
+      <header>Copies of Model Classes</header>
+      <pre>
+class Commenting::Author
+  self.table_name = 'people'
+
+  has_many :comments, :class_name => 'Commenting::Comment'
+
+  def readonly?
+    true
+  end
+end
+
+class Commenting::Comment
+  belongs_to :author, :class_name => 'Commenting::Author'
+end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Dependencies</header>
+      <ul>
+        <li class='slide incremental'>table <code>people</code></li>
+        <li class='slide incremental'>column <code>people.id</code></li>
+        <li class='slide incremental'>more? -> unstable</code></li>
+      </ul>
+    </section>
+
+    <section class='slide'>
+      <header>APIs Return Immutable Objects</header>
+      <pre>
+class People::Person &lt; ActiveRecord::Base
+  def self.lookup(id)
+    find(id).tap do |person|
+      def person.readonly?
+        true
+      end
+    end
+  end
+end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Dependencies</header>
+      <ul>
+        <li class='slide incremental'>class <code>People::Person</code></li>
+        <li class='slide incremental'>method <code>.lookup</code></li>
+        <li class='slide incremental'>argument <code>id</code></li>
+      </ul>
+    </section>
+
+    <section class='slide'>
+      <h2>Ruby has no package privacy = <code>:`(</code></h2>
+      <pre>
+class Commenting::CommentController
+  @people = People::Person.all
+end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Extract Engine to Service</header>
+      <pre>
+class People::Person # not &lt; ActiveRecord::Base
+  def self.lookup(id)
+    json = get("http://people.services/people/#{id}")
+    new( MultiJson.decode( json ) )
+  end
+end</pre>
+    </section>
+
+    <section class="slide chapter green">
+      <span class='badge orange'>IMPORTANT!</span>
+      <h1>Takeaway:<br />Only modify own code/data</h1>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
