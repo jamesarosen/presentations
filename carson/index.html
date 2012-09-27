@@ -190,6 +190,16 @@
       </ul>
     </section>
 
+    <section class='slide'>
+      <header>Continuous Deployment</header>
+      <pre>
+      bundle update &amp;&amp; \
+        rake test &amp;&amp; \
+        git commit -m "updating gems" &amp;&amp; \
+        git push &amp;&amp; \
+        cap deploy</pre>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
