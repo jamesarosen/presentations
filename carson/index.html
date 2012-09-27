@@ -254,6 +254,52 @@
       <h1>nginx = <code>:'(</code></h1>
     </section>
 
+    <section class='slide'>
+      <header>Global State</header>
+      <ul>
+        <li class='slide incremental'>
+          <code>I18n.locale</code> and <code>I18n.default_locale</code>
+        </li>
+        <li class='slide incremental'>
+          <code>I18n.backend</code>
+        </li>
+        <li class='slide incremental'>
+          Translation data
+        </li>
+        <li class='slide incremental'>
+          Rack middleware
+        </li>
+        <li class='slide incremental'>
+          MIME type mappings
+        </li>
+      </ul>
+    </section>
+
+    <section class='slide'>
+      <header>Global State Case Study</header>
+      <pre>
+class Provisioning::Engine &lt; Rails::Engine
+  initializer :i18n_backend do
+    I18n.backend = I18n::Backend::Simple.new(...)
+  end
+end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Global State Case Study</header>
+      <ol>
+        <li class='slide incremental'>
+          Agree on a convention
+        </li>
+        <li class='slide incremental'>
+          Encode convention as gem
+        </li>
+        <li class='slide incremental'>
+          Include gem in engines and Carson
+        </li>
+      </ol>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
