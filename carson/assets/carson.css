@@ -22,9 +22,7 @@
     margin-left: 1em;
     margin-top: 3.5em; }
 
-#code-to-test {
-  width: 80%; }
-
 img.full {
-  padding-top: 10px;
-  width: 80%; }
+  max-height: 80%;
+  max-width: 80%;
+  padding-top: 10px; }
