@@ -112,6 +112,16 @@ running `bundle update my-engine` from the host application. If you don't,
 even a patch deploy becomes a tedious process of updating git tags in the
 `Gemfile`.
 
+Our goal is to have continuous deployment, which might look like
+
+```bash
+bundle update && \
+  rake test && \
+  git commit -m "updating gems" && \
+  git push && \
+  cap deploy
+```
+
 ### Pattern: Single Namespace per Engine
 
 In order to avoid conflicts, each engine gets a single short name. The engine
