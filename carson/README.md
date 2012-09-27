@@ -134,6 +134,13 @@ available. Bundler will refuse to install conflicting versions of gems. This
 means that you have to coordinate upgrades across teams, but you *should*
 have been doing that in the big-ball-of-mud version.
 
+### Deployment
+
+Carson deploys via Capistrano, and there's only one `deploy.rb` file, regardless
+of how many engines you add. This makes it easy to get going with a new feature.
+Just like in a big-ball-of-mud architecture, though, you can't independently
+scale different services.
+
 ### Pattern: Single Namespace per Engine
 
 In order to avoid conflicts, each engine gets a single short name. The engine
@@ -270,10 +277,6 @@ with a version that makes an HTTP call and you can separate the services.
 
  * Communication among engines
    * ActiveSupport::Notifications
- * Deployment
-   * Single Capistrano file
-   * 1 thing for Ops to scale
-     * Can't scale engines independently
  * Further reading
    * https://github.com/jamesarosen/presentations/tree/master/carson
    * http://www.slideshare.net/jackdanger/monorails-gogaruco-2012
