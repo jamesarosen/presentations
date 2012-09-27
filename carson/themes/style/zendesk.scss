@@ -41,6 +41,7 @@ $zendesk-green: #78A300;
         font-size:.5em;
         font-weight: normal;
         color:#888;
+        display: block;
 
         &::before{ content: "- "; }
       }
@@ -127,6 +128,8 @@ $zendesk-green: #78A300;
       letter-spacing: -3px;
       padding-top: 5px;
     }
+
+    ol, ul { margin-top: 1em; font-size: 1.5em; }
   }
 
   .deck-prev-link, .deck-next-link {

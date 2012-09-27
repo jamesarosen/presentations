@@ -6,6 +6,7 @@
     width: 10em;
   }
   span {
+    font-size: 2em;
     margin-left: 1em;
     &:first-of-type { margin-top: 3em; }
   }
@@ -24,10 +25,17 @@
 }
 
 img.full {
-  max-height: 80%;
-  max-width: 80%;
+  max-height: 17em;
+  max-width: 30em;
   padding-top: 10px;
 
-  &#cat-meeting { width: 70%; }
-  &#carnac-the-magnificent { width: 70%; }
+  &#code-to-test { width: 27em; }
+  &#corey-with-cat { width: 25em; }
+  &#sea-monster { width: 23em; }
+  &#sprocket { width: 25em; }
+  &#zaphod { max-height: 17em; }
+  &#stressed-eggs { width: 27em; }
+  &#cat-meeting { width: 22em; }
+  &#bulleit { max-height: 17em; }
+  &#carnac-the-magnificent { width: 30em; }
 }
