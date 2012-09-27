@@ -266,14 +266,6 @@ with a version that makes an HTTP call and you can separate the services.
    * It's Fun!
    * formalized vs. MonoRails
    * more coordination cost than SOA
-   * goal: `cron bundle update && git commit -m "updating engines" && git push origin master && cap deploy`
-   * *need* internal gem server
- * Database
-   * all tables prefixed
-   * can only write to own tables
-   * can read from any, but try not to
- * URLs
-   * Microwave to federate nginx configurations
  * Further reading
    * https://github.com/jamesarosen/presentations/tree/master/carson
    * http://www.slideshare.net/jackdanger/monorails-gogaruco-2012
