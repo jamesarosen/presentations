@@ -19,3 +19,6 @@
   #other-services img + img + img + img + img {
     margin-left: 1em;
     margin-top: 3.5em; }
+
+#code-to-test {
+  width: 80%; }
