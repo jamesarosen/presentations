@@ -112,6 +112,23 @@ running `bundle update my-engine` from the host application. If you don't,
 even a patch deploy becomes a tedious process of updating git tags in the
 `Gemfile`.
 
+### Pattern: Single Namespace per Engine
+
+In order to avoid conflicts, each engine gets a single short name. The engine
+uses that name *everywhere*. For example the Account Provisioning engine
+uses the `Zendesk::Provisioning` Ruby namespace and prefixes all its
+database tables and I18n keys with `provisioning_`. It also owns three URL
+prefixes:
+
+ * `/provisioning` for standard Rails HTML pages
+ * `/assets/provisioning` for all assets
+ * `/api/v*/provisioning` for API endpoints
+
+Since Carson is a Rails application, it will automatically load the `routes.rb`
+file from each engine. Unfortunately, this isn't true of nginx. We're currently
+working on a Capistrano task that will look for `config/nginx.conf` files
+in each of the gems and write a new `nginx.conf` file to the server on deploy.
+
 ### Global State
 
 Rails applications have a great deal of global state. Some examples include
@@ -229,12 +246,6 @@ The other benefit to this approach is that it makes it easier to transition to
 *real* SOA in the future. All you have to do is replace `People::Person.lookup`
 with a version that makes an HTTP call and you can separate the services.
 
-
- * Rationale
-   * Faster tests
-   * Better isolation between teams
-   * Ops restriction on number of runtimes
- * What it is: vertical slices of functionality, hosted in a Rails application
  * Communication among engines
    * ActiveSupport::Notifications
  * Deployment
@@ -252,10 +263,6 @@ with a version that makes an HTTP call and you can separate the services.
    * can only write to own tables
    * can read from any, but try not to
  * URLs
-   * engines own set of prefixes
-     * /prefix
-     * /api/v*/prefix
-     * /assets/prefix
    * Microwave to federate nginx configurations
  * Further reading
    * https://github.com/jamesarosen/presentations/tree/master/carson
