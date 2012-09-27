@@ -113,7 +113,7 @@ $zendesk-green: #78A300;
       &.green {
         background: $zendesk-green;
 
-        &, &.deck-current ~ .deck-status { color: #f8f8f8; }
+        &, &.deck-current ~ .deck-status, code, pre { color: #f8f8f8; }
       }
     }
 
@@ -131,7 +131,7 @@ $zendesk-green: #78A300;
 
     h3 { font-size: 2.5em; }
 
-    ol, ul { margin-top: 1em; font-size: 1.5em; }
+    p, ol, ul { margin-top: 1em; font-size: 1.5em; }
   }
 
   .deck-prev-link, .deck-next-link {
