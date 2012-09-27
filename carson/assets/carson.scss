@@ -1,0 +1,23 @@
+#rails-versions {
+  padding: 3em 4em;
+
+  img {
+    float: left;
+    width: 10em;
+  }
+  span {
+    margin-left: 1em;
+    &:first-of-type { margin-top: 3em; }
+  }
+}
+
+#other-services {
+  padding: 3em 4em;
+  img {
+    float: left;
+    margin: 1em 0.5em;
+    width: 10em;
+  }
+  img + img + img + img { margin-left: 3.5em; }
+  img + img + img + img + img { margin-left: 1em; margin-top: 3.5em; }
+}

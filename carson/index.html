@@ -13,16 +13,33 @@
     <link rel="stylesheet" href="extensions/scale/deck.scale.css">
     <link rel="stylesheet" href="themes/transition/vertical-slide.css">
     <link rel="stylesheet" href="themes/style/zendesk.css">
+    <link rel="stylesheet" href="assets/carson.css">
 
     <script src="assets/modernizr.custom.js"></script>
   </head>
   <body class="deck-container">
     <!-- slides -->
     <section class="slide">
-      <blockquote>
-        <p>"Here's an awesome quote"</p>
-        <cite>Definitely <em>not</em> John Doe</cite>
-      </blockquote>
+      <div id='rails-versions'>
+        <img src='assets/rails logo.png' />
+        <span class='slide incremental'>v1.2</span>
+        <span class='slide incremental'>v2.0</span>
+        <span class='slide incremental'>v2.1</span>
+        <span class='slide incremental'>v2.2</span>
+        <span class='slide incremental'>v2.3</span>
+        <span class='slide incremental'>v2.3.8</span>
+        <span class='slide incremental'>v2.3.14</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div id='other-services'>
+        <img src='assets/rails logo.png' class='slide incremental' />
+        <img src='assets/sphinx logo.jpg' class='slide incremental' />
+        <img src='assets/solr logo.png' class='slide incremental' />
+        <img src='assets/nodejs logo.png' class='slide incremental' />
+        <img src='assets/resque logo.png' class='slide incremental' />
+      </div>
     </section>
 
     <section class="slide chapter green">
@@ -59,7 +76,7 @@
     <script>
       $(function() {
         $(document).bind('deck.beforeInit', function() {
-          $('.slide')
+          $('.deck-container > .slide')
             .not('.chapter.green')
             .not('.buddhy')
               .each(function() {

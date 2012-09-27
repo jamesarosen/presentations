@@ -150,6 +150,10 @@ $zendesk-green: #78A300;
       background:#ddf;
     }
   }
+
+  .slide .slide.incremental {
+    &.deck-next, &.deck-after { display: none; }
+  }
 }
 
 .csstransitions.csstransforms .deck-container:not(.deck-menu) > .slide {

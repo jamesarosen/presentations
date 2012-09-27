@@ -1,0 +1,21 @@
+#rails-versions {
+  padding: 3em 4em; }
+  #rails-versions img {
+    float: left;
+    width: 10em; }
+  #rails-versions span {
+    margin-left: 1em; }
+    #rails-versions span:first-of-type {
+      margin-top: 3em; }
+
+#other-services {
+  padding: 3em 4em; }
+  #other-services img {
+    float: left;
+    margin: 1em 0.5em;
+    width: 10em; }
+  #other-services img + img + img + img {
+    margin-left: 3.5em; }
+  #other-services img + img + img + img + img {
+    margin-left: 1em;
+    margin-top: 3.5em; }
