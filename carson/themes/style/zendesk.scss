@@ -52,7 +52,7 @@ $zendesk-green: #78A300;
 
     a {
       &, &:hover, &:focus, &:active, &:visited {
-        color:#c00;
+        color: $zendesk-green;
         text-decoration:none;
       }
 
