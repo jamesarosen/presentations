@@ -16,8 +16,9 @@
   img {
     float: left;
     margin: 1em 0.5em;
-    width: 10em;
+    width: 20%;
   }
+  img + img { margin-top: 2em; }
   img + img + img + img { margin-left: 3.5em; }
   img + img + img + img + img { margin-left: 1em; margin-top: 3.5em; }
 }

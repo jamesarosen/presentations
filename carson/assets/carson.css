@@ -13,7 +13,9 @@
   #other-services img {
     float: left;
     margin: 1em 0.5em;
-    width: 10em; }
+    width: 20%; }
+  #other-services img + img {
+    margin-top: 2em; }
   #other-services img + img + img + img {
     margin-left: 3.5em; }
   #other-services img + img + img + img + img {
