@@ -131,24 +131,112 @@ all of the engines' `config/locales/*.yml` files. We encoded that as a public
 method in our `zendesk_i18n` gem and called that method in an initializer in
 Carson.
 
+### Antipattern: Shared, Mutable Objects
+
+In late 2011, Reg Braithwaite wrote a
+[lovely article](http://github.com/raganwald/homoiconic/blob/master/2011/11/COMEFROM.md)
+titled "Williams, Master of the 'Come From'." He described a coworker who
+practiced a rather extreme form of decoupling. Many Rails programmers, when
+faced with the task of relating people to comments might write
+
+```ruby
+class Person
+  has_many :comments
+end
+
+class Comment
+  belongs_to :person
+end
+```
+
+Williams, instead, would break these two concerns into modules. The people
+module knows nothing about comments:
+
+```ruby
+class People::Person
+end
+```
+
+and the comment module knows about both:
+
+```ruby
+class Commenting::Comment
+  belongs_to :author, :class_name => 'People::Person'
+end
+
+People::Person.class_eval do
+  has_many :comments, :class_name => 'Commenting::Comment'
+end
+```
+
+At first glance, this mechanism seems rather well suited to the Carson mindset.
+The person-management engine doesn't care how many extra features you add in;
+each feature can manage itself. If any engine can monkey-patch `Person`,
+however, it can change the behavior of the people system. By adding a bad
+validation, it could prevent new signups.
+
+The cause of this problem is that the commenting engine isn't obeying a cardinal
+rule: *if it's not your data and it's not your code, you can't change it.* There
+are at least two good ways to keep this separation of concerns while obeying
+this rule. The first is to build your own read-only model backed by the same
+data:
+
+```ruby
+class Commenting::Author
+  self.table_name = 'people'
+
+  has_many :comments, :class_name => 'Commenting::Comment'
+
+  def readonly?
+    true
+  end
+end
+
+class Commenting::Comment
+  belongs_to :author, :class_name => 'Commenting::Author'
+end
+```
+
+With this implementation, the commenting system depends on two things from the
+people system: that there's a table named "people" and that it has a primary-key
+column named "id". Those are relatively stable things, so this is a reasonable
+dependency. If the commenting system needs more information from the people
+system (names, roles, etc.), then that dependency becomes increasingly unstable.
+In that case, it's better to use option two.
+
+The second is to have the people expose a public API that other engines can
+use:
+
+```ruby
+class People::Person
+  def self.lookup(id)
+    find(id).tap do |person|
+      def person.readonly?
+        true
+      end
+    end
+  end
+end
+```
+
+Here, the commenting system depends on the name of the `People::Person` class,
+that that class responds to `lookup`, and that `lookup` takes a single `id`
+parameter. These, too, are fairly stable dependencies. Overall, this is a
+better solution than the direct-table-lookup version, and even more so if the
+commenting system needs more than just an ID to reference.
+
+The other benefit to this approach is that it makes it easier to transition to
+*real* SOA in the future. All you have to do is replace `People::Person.lookup`
+with a version that makes an HTTP call and you can separate the services.
+
+
  * Rationale
    * Faster tests
    * Better isolation between teams
    * Ops restriction on number of runtimes
  * What it is: vertical slices of functionality, hosted in a Rails application
  * Communication among engines
-   * Database
-     * Danger!
-   * Ruby Service APIs
-   * HTTP APIs
    * ActiveSupport::Notifications
- * Globals
-   * I18n.locale
-   * I18n.backend
-   * MIME types
-   * Rack middleware
-   * Core models: User, Account, &c;
-     * each Carson gem has its own User & Account model, backed by the same tables
  * Deployment
    * Single Capistrano file
    * 1 thing for Ops to scale
@@ -175,7 +263,7 @@ Carson.
    * http://confreaks.com/videos/1125-gogaruco2012-mega-rails
    * http://en.wikipedia.org/wiki/Conway's_Law
    * http://thunderboltlabs.com/posts/soa-antipattern-centralized-db
-   * http://github.com/homoiconic/blob/master/2011/11/COMEFROM.md
+   * http://github.com/raganwald/homoiconic/blob/master/2011/11/COMEFROM.md
    * http://confreaks.com/videos/1115-gogaruco2012-go-ahead-make-a-mess
    * https://speakerdeck.com/u/skmetz/p/go-ahead-make-a-mess
    * https://www.youtube.com/watch?v=bNn6M2vqxHE
