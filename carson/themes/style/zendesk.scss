@@ -106,7 +106,8 @@ $zendesk-green: #78A300;
 
       &.green {
         background: $zendesk-green;
-        color: #f8f8f8;
+
+        &, &.deck-current ~ .deck-status { color: #f8f8f8; }
       }
     }
 
