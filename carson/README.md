@@ -177,6 +177,29 @@ all of the engines' `config/locales/*.yml` files. We encoded that as a public
 method in our `zendesk_i18n` gem and called that method in an initializer in
 Carson.
 
+### Pattern: Evented Communication
+
+`ActiveSupport::Notifications` is a greay way for engines to communicate with
+one another. It helps to use domain-level events so clients don't have to
+parse out the meaning of the event from the event data.
+
+```ruby
+class Provisioning::Account < ActiveRecord::Base
+  after_save :send_notifications
+
+  private
+
+  def send_notifications
+    if ssl_certificate.changed?
+      ActiveSupport::Notifications.instrument(
+        "account.ssl_certificate.changed",
+        ssl_certificate
+      )
+    end
+  end
+end
+```
+
 ### Antipattern: Shared, Mutable Objects
 
 In late 2011, Reg Braithwaite wrote a
@@ -275,8 +298,6 @@ The other benefit to this approach is that it makes it easier to transition to
 *real* SOA in the future. All you have to do is replace `People::Person.lookup`
 with a version that makes an HTTP call and you can separate the services.
 
- * Communication among engines
-   * ActiveSupport::Notifications
  * Further reading
    * https://github.com/jamesarosen/presentations/tree/master/carson
    * http://www.slideshare.net/jackdanger/monorails-gogaruco-2012

@@ -325,6 +325,28 @@ end</pre>
       <h1>Takeaway:<br />Beware global state</h1>
     </section>
 
+    <section class='slide chapter green'>
+      <h3>Pattern: <code>AS::Notifications</code></h3>
+    </section>
+
+    <section class='slide'>
+      <pre>
+class Provisioning::Account &lt; ActiveRecord::Base
+  after_save :send_notifications
+
+  private
+
+  def send_notifications
+    if ssl_certificate.changed?
+      ActiveSupport::Notifications.instrument(
+        "account.ssl_certificate.changed",
+        ssl_certificate
+      )
+    end
+  end
+end</pre>
+    </section>
+
     <section class='slide chapter'>
       <h1>Antipattern: Shared, Mutable Objects</h1>
     </section>
