@@ -26,3 +26,5 @@ img.full {
   max-height: 80%;
   max-width: 80%;
   padding-top: 10px; }
+  img.full#cat-meeting {
+    width: 70%; }
