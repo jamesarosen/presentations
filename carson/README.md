@@ -292,3 +292,4 @@ with a version that makes an HTTP call and you can separate the services.
    * [Mess Graphs](https://speakerdeck.com/u/skmetz/p/go-ahead-make-a-mess)
    * [Sea Monster](http://www.flickr.com/photos/btsiders/74652478/)
    * [Sad Pumpkin](http://www.flickr.com/photos/nathaninsandiego/4061850729/)
+   * [Corey with Cat](http://twitpic.com/ashs8m/full)
