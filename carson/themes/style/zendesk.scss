@@ -129,9 +129,16 @@ $zendesk-green: #78A300;
       padding-top: 5px;
     }
 
+    h1 cite {
+      display: block;
+      font-size: 0.25em;
+    }
+
     h3 { font-size: 2.5em; }
 
     p, ol, ul { margin-top: 1em; font-size: 1.5em; }
+
+    img, iframe, video { max-height: 100%; }
   }
 
   .deck-prev-link, .deck-next-link {
