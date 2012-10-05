@@ -7,6 +7,11 @@ eating frozen radio dinners." -Johnny Carson
 
 "I did not know that." -Johnny Carson
 
+## Copyright Notice
+
+All material herein is Copyright Zendesk 2008-2012, with the exception of
+certain images, whose source is noted below.
+
 ## Introduction
 
 Zendesk was born five years ago as a fairly standard Rails 1.2 application. In
