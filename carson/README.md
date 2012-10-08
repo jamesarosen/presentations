@@ -14,8 +14,8 @@ certain images, whose source is noted below.
 
 ## Introduction
 
-Zendesk was born five years ago as a fairly standard Rails 1.2 application. In
-that time, we've upgraded Rails many times and added Resque, Sphinx, Solr,
+Zendesk was born five years ago as a standard Rails 1.2 application. Since
+then, we've upgraded Rails many times and added Resque, Sphinx, Solr,
 ejabberd, Node.js, and other non-Rails services. Until very recently, though,
 all of the Rails code was in one project and one runtime. This is the story
 of how that has begun to change.
@@ -52,21 +52,25 @@ groups.
 One of the first ventures into building features in separate projects was
 "Sea Monster," our content-management system. This is a Rails 2 engine that
 plugged into our existing infrastructure. Sea Monster is a very standard Rails
-application, so it fit nicely in that architecture.
+application, so it fit nicely in that architecture. Sea Monster is still running
+as an engine in our Rails 2 stack today.
 
-A later project, however, wasn't quite as nice a fit. Zendesk Apps was to
-be an API back-end plus a ton of JavaScript, and Rails 2 doesn't give you
-much support for assets from engines. (For those who haven't tried, it involves
-running a `rake` task to import the assets into the app's `public/` folder
-and then making sure those assets are in your asset compiler.) Rails 3's
-asset pipeline (a.k.a. [Sprockets](https://github.com/sstephenson/sprockets))
-does this much better. Thus, we decided it was time to start developing a
-Rails 3 application.
+One thing we learned from Sea Monster was that Rails 2 engines don't do assets
+very well. For those who haven't tried, it involves running a `rake` task to
+import the assets into the app's `public/` folder and then making sure those
+assets are in your asset compiler.) Rails 3's asset pipeline (a.k.a.
+[Sprockets](https://github.com/sstephenson/sprockets)) does this much better.
 
-One morning after we had proven the Zendesk Apps concept, I walked up to our
-head of infrastructure, whom we'll call "Zaphod" and asked, "Hey, Zaphod. We're
-getting close to the point where we want to start deploying Zendesk Apps. What
-do I need to do to get a Rails 3 instance running in production?"
+Soon after Sea Monster, we started Zendesk Apps. This was to be an API back-end
+plus a ton of JavaScript, so we realized it wasn't going to be such a great fit
+for our Rails 2 stack. We decided it was time to start developing a Rails 3
+application.
+
+One morning after we had built a proof-of-concept Zendesk Apps framework, I
+walked up to our head of infrastructure, whom we'll call "Zaphod" and asked,
+"Hey, Zaphod. We're getting close to the point where we want to start deploying
+Zendesk Apps. What do I need to do to get a Rails 3 instance running in
+production?"
 
 Zaphod looked at me like I had exactly the wrong number of heads. "Rails 3?
 We're not prepared to provision, monitor, and scale an entirely separate set of
@@ -150,9 +154,9 @@ scale different services.
 
 In order to avoid conflicts, each engine gets a single short name. The engine
 uses that name *everywhere*. For example the Account Provisioning engine
-uses the `Zendesk::Provisioning` Ruby namespace and prefixes all its
-database tables and I18n keys with `provisioning_`. It also owns three URL
-prefixes:
+uses the `Zendesk::Provisioning` Ruby namespace, prefixes all its database
+tables with `provisioning_` and its I18n keys with `provisioning.`. It also owns
+three URL prefixes:
 
  * `/provisioning` for standard Rails HTML pages
  * `/assets/provisioning` for all assets
@@ -247,7 +251,8 @@ At first glance, this mechanism seems rather well suited to the Carson mindset.
 The person-management engine doesn't care how many extra features you add in;
 each feature can manage itself. If any engine can monkey-patch `Person`,
 however, it can change the behavior of the people system. By adding a bad
-validation, it could prevent new signups.
+validation, or even an `after_save` hook that could fail, it could prevent new
+signups.
 
 The cause of this problem is that the commenting engine isn't obeying a cardinal
 rule: *if it's not your data and it's not your code, you can't change it.* There

@@ -26,13 +26,6 @@
     </section>
 
     <section class="slide chapter green">
-      <h1>
-        Carson
-        <cite>https://github.com/jamesarosen/presentations/carson</cite>
-      </h1>
-    </section>
-
-    <section class="slide chapter green">
       <h1>Chapter 0: <code>whoami</code></h1>
     </section>
 
@@ -41,6 +34,13 @@
       <p>Senior User Happiness Engineer, Zendesk</p>
       <p>@jamearosen</p>
       <p>https://github.com/jamesarosen</p>
+    </section>
+
+    <section class="slide chapter green">
+      <h1>
+        Carson
+        <cite>https://github.com/jamesarosen/presentations/carson</cite>
+      </h1>
     </section>
 
     <section class="slide chapter green">
@@ -272,7 +272,7 @@
       <header>Upgrading a Dependency</header>
       <ul>
         <li class='slide incremental'>
-          In big-ball-of-mud: hope nothing breaks
+          Big-ball-of-mud: <code>bundle exec hope-nothing-breaks</code>
         </li>
         <li class='slide incremental'>
           <code>gemspec</code>s add information about who depends on what
@@ -362,10 +362,6 @@
       </ul>
     </section>
 
-    <section class='slide'>
-      <h1>nginx = <code>:'(</code></h1>
-    </section>
-
     <section class='slide chapter green'>
       <h3>Anti-Pattern: Unexpected Global State</h3>
     </section>
@@ -381,6 +377,9 @@
         </li>
         <li class='slide incremental'>
           Translation data
+        </li>
+        <li class='slide incremental'>
+          Database Schema
         </li>
         <li class='slide incremental'>
           Rack middleware
@@ -411,9 +410,19 @@ end</pre>
           Encode convention as gem
         </li>
         <li class='slide incremental'>
-          Include gem in engines and Carson
+          Include gem in each (relevant) engine
         </li>
       </ol>
+    </section>
+
+    <section class='slide'>
+      <header>Global State Case Study</header>
+      <pre>
+class Provisioning::Engine &lt; Rails::Engine
+  initializer :i18n do
+    Zendesk::I18n.init  # idempotent
+  end
+end</pre>
     </section>
 
     <section class="slide chapter green">
@@ -426,6 +435,23 @@ end</pre>
     </section>
 
     <section class='slide'>
+      <header>Good</header>
+      <pre>
+class Provisioning::Account &lt; ActiveRecord::Base
+  after_save :send_notifications
+
+  private
+
+  def send_notifications
+    ActiveSupport::Notifications.instrument(
+      "account.changed"
+    )
+  end
+end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Better</header>
       <pre>
 class Provisioning::Account &lt; ActiveRecord::Base
   after_save :send_notifications
@@ -523,8 +549,9 @@ end</pre>
       <ul>
         <li class='slide incremental'>same database</li>
         <li class='slide incremental'>table <code>people</code></li>
-        <li class='slide incremental'>column <code>people.id</code></li>
+        <li class='slide incremental'>PK column <code>people.id</code></li>
         <li class='slide incremental'>more? -> unstable</code></li>
+        <li class='slide incremental'>Engine -> Engine: <code>:`(</code></li>
       </ul>
     </section>
 
@@ -549,6 +576,7 @@ end</pre>
         <li class='slide incremental'>class <code>People::Person</code></li>
         <li class='slide incremental'>method <code>.lookup</code></li>
         <li class='slide incremental'>argument <code>id</code></li>
+        <li class='slide incremental'>Engine -> Engine: <code>:`(</code></li>
       </ul>
     </section>
 
@@ -576,6 +604,9 @@ end</pre>
       <ul>
         <li class='slide incremental'>
           Each feature that has clients builds a consumer gem
+        </li>
+        <li class='slide incremental'>
+          No Engine -> Engine dependencies = <code>:)</code>
         </li>
         <li class='slide incremental'>
           + Semantic versioning
