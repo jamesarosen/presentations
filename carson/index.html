@@ -428,7 +428,7 @@ end</pre>
       <pre>
 class Provisioning::Engine &lt; Rails::Engine
   initializer :i18n do
-    Zendesk::I18n.init  # idempotent
+    Zendesk::I18n.init(self)  # idempotent
   end
 end</pre>
     </section>
