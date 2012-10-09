@@ -438,6 +438,11 @@ end</pre>
       <h1>Takeaway:<br />Beware global state</h1>
     </section>
 
+    <section class="slide chapter green">
+      <span class='badge orange'>FREE BONUS!</span>
+      <h1>Bonus Takeaway:<br />Encode conventions as gems</h1>
+    </section>
+
     <section class='slide chapter green'>
       <h3>Pattern: <code>AS::Notifications</code></h3>
     </section>
@@ -504,28 +509,30 @@ end</pre>
     <section class='slide'>
       <header>Williams Rails App</header>
       <pre>
-      class People::Person
-      end</pre>
+  class People::Person
+  end</pre>
       <pre>
-      class Commenting::Comment
-        belongs_to :author, :class_name => 'People::Person'
-      end
+  class Commenting::Comment
+    belongs_to :author,
+               :class_name => 'People::Person'
+  end
 
-      People::Person.class_eval do
-        has_many :comments, :class_name => 'Commenting::Comment'
-      end</pre>
+  People::Person.class_eval do
+    has_many :comments,
+             :class_name => 'Commenting::Comment'
+  end</pre>
     </section>
 
     <section class='slide'>
       <header>Danger!</header>
       <pre class='slide incremental'>
-      People::Person.class_eval do
-        validates_presence_of :email
-      end</pre>
+  People::Person.class_eval do
+    validates_presence_of :email
+  end</pre>
       <pre class='slide incremental'>
-      People::Person.class_eval do
-        before_save :something_that_could_fail
-      end</pre>
+  People::Person.class_eval do
+    before_save :something_that_could_fail
+  end</pre>
     </section>
 
     <section class='slide'>
@@ -540,7 +547,8 @@ end</pre>
 class Commenting::Author
   self.table_name = 'people'
 
-  has_many :comments, :class_name => 'Commenting::Comment'
+  has_many :comments,
+           :class_name => 'Commenting::Comment'
 
   def readonly?
     true
@@ -548,7 +556,8 @@ class Commenting::Author
 end
 
 class Commenting::Comment
-  belongs_to :author, :class_name => 'Commenting::Author'
+  belongs_to :author,
+             :class_name => 'Commenting::Author'
 end</pre>
     </section>
 
