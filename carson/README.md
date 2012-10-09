@@ -12,6 +12,11 @@ eating frozen radio dinners." -Johnny Carson
 All material herein is Copyright Zendesk 2008-2012, with the exception of
 certain images, whose source is noted below.
 
+## What others are saying about this talk
+
+> Smart, useful talk by @jamesarosen on SOA and the Big Ball of Mud. #aloharubyconf
+- [Larry Staton Jr.](https://twitter.com/statonjr/status/255464588466872320)
+
 ## Introduction
 
 Zendesk was born five years ago as a standard Rails 1.2 application. Since
