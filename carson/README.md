@@ -17,6 +17,9 @@ certain images, whose source is noted below.
 > Smart, useful talk by @jamesarosen on SOA and the Big Ball of Mud. #aloharubyconf
 - [Larry Staton Jr.](https://twitter.com/statonjr/status/255464588466872320)
 
+> "James's Carson talk was awesome, except for the bow tie."
+- [Dr. Nic Williams](http://drnicwilliams.com/)
+
 ## Introduction
 
 Zendesk was born five years ago as a standard Rails 1.2 application. Since
