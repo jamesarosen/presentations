@@ -1,6 +1,6 @@
 # Talk Proposal: JavaScript Equipment
 
-This talk will describe the tools that Zendesk uses to deliver high-quailty,
+This talk will describe the tools that Zendesk uses to deliver high-quality,
 reliable, and maintainable JavaScript. The talk will cover linting (JSHint),
 testing (Jasmine, Mocha, PhantomJS, VCR), composition (CommonJS), packaging
 (Bower), and building (GlueJS, Sprockets, Rake).
