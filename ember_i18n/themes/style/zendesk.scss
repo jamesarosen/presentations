@@ -1,0 +1,180 @@
+$zendesk-green: #78A300;
+
+@mixin rotate($deg) {
+  -webkit-transform:rotate($deg);
+  -moz-transform:rotate($deg);
+  -ms-transform:rotate($deg);
+  -o-transform:rotate($deg);
+  transform:rotate($deg);
+}
+
+@mixin background-gradient($position, $stop1, $stop2) {
+  background-image: -o-linear-gradient($position, $stop1, $stop2);
+  background-image: -moz-linear-gradient($position, $stop1, $stop2);
+  background-image: -webkit-linear-gradient($position, $stop1, $stop2);
+  background-image: -ms-linear-gradient($position, $stop1, $stop2);
+  background-image: linear-gradient($position, $stop1, $stop2);
+}
+
+.deck-container {
+  color: #222;
+  font-family: "DIN Next LT Pro", Arial, sans-serif;
+  font-size: 1.75em;
+  background: #f9f9f9;
+
+  .slide {
+    code {
+      color:#888;
+    }
+
+    blockquote {
+      font-size: 2em;
+      padding: 1em 2em;
+      color: #272727;
+
+      p {
+        margin: 0;
+        & + p { margin-top: 1em; }
+      }
+
+      cite {
+        font-size:.5em;
+        font-weight: normal;
+        color:#888;
+        display: block;
+
+        &::before{ content: "- "; }
+      }
+    }
+
+    ::-moz-selection{ background:#c00; color:#fff; }
+    ::selection { background:#c00; color:#fff; }
+
+    a {
+      &, &:hover, &:focus, &:active, &:visited {
+        color: $zendesk-green;
+        text-decoration:none;
+      }
+
+      &:hover, &:focus {
+        text-decoration:underline;
+      }
+    }
+
+    .badge {
+      @include rotate(45deg);
+
+      display: block;
+      font-size: 18px;
+      padding: 10px 100px;
+      position: absolute;
+      right: -110px;
+      text-align: center;
+      top: 50px;
+      width: 150px;
+
+      &.black {
+        background: #343434;
+        @include background-gradient(left, rgb(33,33,33) 0%, rgb(69,69,69) 100%);
+      }
+
+      &.orange {
+        background: rgb(195,81,22);
+      }
+    }
+
+    figure {
+      text-align: center;
+      figcaption { color: #888; font-size: 85%; }
+    }
+  }
+
+  > .slide {
+    overflow: hidden;
+    padding: 10px 35px;
+
+    .deck-before, .deck-previous {
+      opacity:0.4;
+
+      &:not(.deck-child-current) {
+        .deck-before, .deck-previous {
+          opacity:1;
+        }
+      }
+    }
+
+    .deck-child-current {
+      opacity:1;
+    }
+
+    &.chapter {
+      color: $zendesk-green;
+
+      &.green {
+        background: $zendesk-green;
+
+        &, &.deck-current ~ .deck-status, code, pre { color: #f8f8f8; }
+      }
+    }
+
+    header, &.chapter header {
+      color: #7d7d7d;
+      background: transparent url("grey_lotus.svg") top right no-repeat;
+      background-size: 85px;
+      border-bottom: 5px solid $zendesk-green;
+      font-size: 50px;
+      font-weight: 200;
+      height: 80px;
+      letter-spacing: -3px;
+      padding-top: 5px;
+    }
+
+    h1 cite {
+      display: block;
+      font-size: 0.25em;
+    }
+
+    h3 { font-size: 2.5em; }
+
+    p, ol, ul { margin-top: 1em; font-size: 1.5em; }
+
+    img, iframe, video { max-height: 100%; }
+  }
+
+  .deck-prev-link, .deck-next-link {
+    background:#ccc;
+    font-family:serif; // sans-serif arrows x-browser fail
+
+    &, &:hover, &:focus, &:active, &:visited {
+      color:#fff;
+    }
+
+    &:hover, &:focus {
+      background:#c00;
+      text-decoration:none;
+    }
+  }
+
+  .deck-status {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  &.deck-menu {
+    .slide {
+      background:#eee;
+    }
+
+    .deck-current, .no-touch & .slide:hover {
+      background:#ddf;
+    }
+  }
+
+  .slide .slide.incremental {
+    &.deck-next, &.deck-after { display: none; }
+  }
+}
+
+.csstransitions.csstransforms .deck-container:not(.deck-menu) > .slide {
+  padding: 10px 35px;
+}
