@@ -87,6 +87,9 @@
     .deck-container > .slide h1 cite {
       display: block;
       font-size: 0.25em; }
+    .deck-container > .slide h1 .subtitle {
+      display: block;
+      font-size: 0.4em; }
     .deck-container > .slide h3 {
       font-size: 2.5em; }
     .deck-container > .slide p, .deck-container > .slide ol, .deck-container > .slide ul {
