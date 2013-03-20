@@ -1,3 +1,10 @@
+## Copyright
+
+All material herein is Copyright Zendesk 2008-2012, with the exception of
+certain images, whose source is noted below.
+
+ * odd_eyed_cat.jpg, [Konstantinos Papakonstantinou](http://www.flickr.com/photos/ihasb33r/2573196546/)
+
 ## Links
 
  * https://github.com/trek/ember-todos-with-build-tools-tests-and-other-modern-conveniences
