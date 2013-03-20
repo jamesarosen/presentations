@@ -144,6 +144,15 @@ $zendesk-green: #78A300;
     p, ol, ul { margin-top: 1em; font-size: 1.5em; }
 
     img, iframe, video { max-height: 100%; }
+
+    cite {
+      font-size: 0.9em;
+      a {
+        &, &:hover, &:focus, &:active, &:visited {
+          color: #606060;
+        }
+      }
+    }
   }
 
   .deck-prev-link, .deck-next-link {
