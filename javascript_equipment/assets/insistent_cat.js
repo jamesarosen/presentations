@@ -18,7 +18,7 @@
   function addKeyboardHandlers(cat) {
     $(document).on('keyup', function(event) {
       if (event.keyCode === 67) {
-        cat.following ? cat.unfollow() : cat.follow();
+        if (cat.following) { cat.unfollow() } else { cat.follow(); }
       }
     });
   }
