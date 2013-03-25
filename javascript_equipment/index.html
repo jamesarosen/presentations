@@ -95,6 +95,23 @@ Origin: L, without which not</pre>
       </ol>
     </section>
 
+    <section class="slide">
+      <header>JSHint Usage</header>
+      <pre class='slide'>jshint assets/insistent_cat.js
+assets/insistent_cat.js: line 21, col 53, Expected an assignment or function call and instead saw an expression.
+</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Before &amp; After</header>
+      <pre class='slide'>cat.following ? cat.unfollow() : cat.follow();</pre>
+      <pre class='slide'>if (cat.following) {
+  cat.unfollow()
+} else {
+ cat.follow();
+}</pre>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
