@@ -179,6 +179,17 @@ find . -name *.js | xargs node_modules/jshint/bin/hint</pre>
 }(this, this.jQuery));</pre>
     </section>
 
+    <section class='slide'>
+      <header>"Solution"</header>
+      <p>In <code>script/build</code>:</p>
+      <pre>#!/bin/sh
+cat src/header.js
+  src/cat_image.js
+  src/cat_follower.js
+  src/footer.js
+  > assets/insistent_cat.js</pre>
+    </section>
+
     <section class="slide chapter green">
       <h1>Chapter 4: CommonJS</h1>
     </section>
