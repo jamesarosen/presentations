@@ -151,6 +151,17 @@ assets/insistent_cat.js: line 21, col 53, Expected an assignment or function cal
   > assets/insistent_cat.js</pre>
     </section>
 
+    <section class='slide'>
+      <header>Problem!</header>
+      <pre>(function(window, $, undefined) {
+
+  // contents go gere
+
+  window.InsistentCat = InsistentCat;
+
+}(this, this.jQuery));</pre>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
