@@ -1,0 +1,7 @@
+{
+  "name": "JSTools",
+  "version": "1.0.0",
+  "devDependencies": {
+    "browserify": "~2.8.0"
+  }
+}
