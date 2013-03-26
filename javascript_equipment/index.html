@@ -349,6 +349,28 @@ done
       <pre>sed -E 's/^src\/(.+)\.js$/\1/p'</pre>
     </section>
 
+    <section class='slide'>
+      <header>Browserify: Installation</header>
+      <pre>{
+  "devDependencies": {
+    "browserify": "~2.8.0"
+  }
+}</pre><pre>npm install</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Browserify: Export</header>
+      <p>In <code>src/main.js</code>:</p>
+      <pre>window.InsistentCat = require('./cat_follower');</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Browserify: Run</header>
+      <pre>./node_modules/browserify/bin/cmd.js \
+  src/main.js \
+  > assets/insistent_cat.js</pre>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
