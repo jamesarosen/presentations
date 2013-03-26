@@ -1,0 +1,10 @@
+#!/bin/sh
+
+outfile="assets/insistent_cat.js"
+js_files=$(find src -name *.js)
+
+echo "$js_files" | xargs jshint || exit 1;
+cat  script/commonjs_shim.js > $outfile;
+for js_file in $js_files; do
+  echo "$(script/cjs2browser $js_file)" >> $outfile;
+done
