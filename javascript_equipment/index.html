@@ -172,6 +172,27 @@ assets/insistent_cat.js: line 21, col 53, Expected an assignment or function cal
 }(this, this.jQuery));</pre>
     </section>
 
+    <section class="slide chapter green">
+      <h1>Chapter 4: CommonJS</h1>
+    </section>
+
+    <section class='slide'>
+      <header>Export</header>
+      <pre>// in cat_image.js:
+module.exports = function buildCatImage(src, options) {
+  // ...
+};</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Import</header>
+      <pre>// in cat_follower.js:
+var buildImage = require('./cat_image');
+// ...
+var catImage = buildImage('path/to/cat.png', { width: '20px' });
+</pre>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
