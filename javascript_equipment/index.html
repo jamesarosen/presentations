@@ -221,6 +221,52 @@ var catImage = buildImage('path/to/cat.png', { width: '20px' });
       </ul>
     </section>
 
+    <section class='slide'>
+      <header>Browserification: Framework</header>
+      <p>From <a href="https://github.com/maccman/sprockets-commonjs/blob/master/lib/assets/javascripts/sprockets/commonjs.js">Sprockets-CommonJS</a>:</p>
+      <pre>var require = function(name, root) {
+  ...
+};
+require.define = function(bundle) {
+  ...
+};</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Browserification: Compiler</header>
+      <p>In <code>script/cjs2browser</code>:</p>
+      <pre>#!/bin/sh
+
+filename="$1";
+
+echo "require.define(\"${filename}\","
+echo "  function(exports, require, module) {";
+cat  $filename;
+echo "});";</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Browserification: Build Script</header>
+      <pre>outfile="assets/insistent_cat.js"
+find src -name *.js | xargs node_modules/jshint/bin/hint || exit 1;
+cat  script/commonjs_shim.js > $outfile;
+echo "$(script/cjs2browser src/cat_image.js)" >> $outfile;
+echo "$(script/cjs2browser src/cat_follower.js)" >> $outfile;
+</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Refactor</header>
+      <pre>outfile="assets/insistent_cat.js"
+js_files=$(find src -name *.js)
+echo "$js_files" | xargs jshint || exit 1;
+cat  script/commonjs_shim.js > $outfile;
+for js_file in $js_files; do
+  echo "$(script/cjs2browser $js_file)" >> $outfile;
+done
+</pre>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>
