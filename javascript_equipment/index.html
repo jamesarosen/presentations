@@ -286,6 +286,14 @@ var catImage = buildImage('path/to/cat.png', { width: '20px' });
     </section>
 
     <section class='slide'>
+      <header>CommonJS Compiler Concerns</header>
+      <p class='slide'>Define <code>require</code></p>
+      <p class='slide'>Convert files to module definitions</p>
+      <p class='slide'>Optional: convert (vendor) globals to modules</p>
+      <p class='slide'>Optional: export a single global</p>
+    </section>
+
+    <section class='slide'>
       <header>Browserification: Framework</header>
       <p>From <a href="https://github.com/maccman/sprockets-commonjs/blob/master/lib/assets/javascripts/sprockets/commonjs.js">Sprockets-CommonJS</a>:</p>
       <pre>var require = function(name, root) {
