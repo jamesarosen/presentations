@@ -155,6 +155,13 @@ assets/insistent_cat.js: line 21, col 53, Expected an assignment or function cal
     </section>
 
     <section class='slide'>
+      <header>Refactor</header>
+      <p>In <code>script/hint</code>:</p>
+      <pre>#!/bin/sh
+find . -name *.js | xargs node_modules/jshint/bin/hint</pre>
+    </section>
+
+    <section class='slide'>
       <header><code>cat</code></header>
       <pre>cat src/cat_image.js \
   src/cat_follower.js \
