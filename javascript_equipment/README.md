@@ -113,6 +113,97 @@ We put everything together in `script/build`:
 This is sufficient for projects with just a couple of files; more complex
 projects can benefit from a module system.
 
+## Module Systems
+
+There are several different module systems in the JavaScript world, including
+<abbr title="Asynchronous Module Definition">AMD</abbr>,
+<abbr title="ECMAScript 6">ES6</abbr> modules, and CommonJS. Mikito Takada
+discusses the pros and cons of each in his book,
+[Single Page Apps in Depth](http://singlepageappbook.com/). I'm going to use
+CommonJS here, for the following reasons:
+
+ * module names needn't be globally unique, so multiple libraries can define
+   a `lib/utils.js` module
+ * the list of CommonJS libraries is very large (though the subset targetting
+   browsers is much smaller)
+ * we're already using `npm` to manage our development dependencies
+
+To turn modules from individual files into a single, browser-friendly library,
+we need two things:
+
+ 1. an implementation of `require` that runs in the browser
+ 1. a way to turn a file into a defined module, consumable via `require`
+
+Two nice optional features are
+
+ 1. a way to convert globals (like `window.jQuery` or `Math.PI`) into
+    `require`-able modules
+ 1. a way to export a "main" module as a global
+
+To define a module, you set `module.exports` in a file:
+
+    // in lib/cat_image.js
+    module.exports = function buildCatImage(src, options) {
+      // ...
+    };
+
+To consume it from another module, you use `require`:
+
+    var catImage = require('cat_image'),
+        img = catImage('cat.jpg', { width: '2em' });
+
+There are several different tools for turning CommonJS modules into a
+single browser-friendly file, including [OneJS](https://github.com/azer/onejs),
+[GlueJS](https://github.com/mixu/gluejs), and
+[Browserify](https://github.com/substack/node-browserify). First, we'll try
+writing one of our own.
+
+We need an implementation of `require`. I particularly like the
+[one from sprockets-commonjs](https://github.com/maccman/sprockets-commonjs/blob/master/lib/assets/javascripts/sprockets/commonjs.js). Its basic
+structure is
+
+    (function() {
+      if (!this.require) {
+        var require = function(name, root) {
+          ...
+        };
+        require.define = function(bundle) {
+          ...
+        };
+      }
+    }).call(this);
+
+Given this implementation, the following script (`script/commonjs2browser`) will
+convert a CommonJS file into a defined module:
+
+    #!/bin/sh
+    filename="$1";
+    echo "require.define(\"${filename}\","
+    echo "  function(exports, require, module) {";
+    cat  $filename;
+    echo "});";
+
+We can work that into our build system like so:
+
+    #!/bin/sh
+    js_files=$(find src -name *.js)
+
+    echo "$js_files" | xargs jshint || exit 1;
+
+    cat script/commonjs_shim.js > $outfile;
+
+    for js_file in $js_files; do
+      echo "$(script/cjs2browser $js_file)" >> $outfile;
+    done
+
+    echo "window.MyLibrary = require('src/module2.js');"
+
+This system has some important weaknesses, though. First, the module names
+are the same as the (relative) file paths. Second, we have to convert the module
+to a global manually. We could fix the first with `sed` and the second with a
+more sophisticated `script/commonjs2browser`, but it would be easy to introduce
+bugs. It's time to move out of the realm of shell scripting.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the exception of
