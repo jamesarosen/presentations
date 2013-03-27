@@ -105,6 +105,11 @@ footer:
     cat  src/file2.js               >> $outfile;
     echo "}(this, this.jQuery));"   >> $outfile;
 
+We put everything together in `script/build`:
+
+    #!/bin/sh
+    script/jshint && script/compile
+
 This is sufficient for projects with just a couple of files; more complex
 projects can benefit from a module system.
 
