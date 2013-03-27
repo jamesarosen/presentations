@@ -21,6 +21,22 @@ talk will start off running tools from the (Unix) command line. As the tasks get
 increasingly complex, we will move up the abstraction stack through shell
 scripting, Make, and Grunt.
 
+## Product: `insistent_cat.js`
+
+In the course of this talk, we will be working on a small jQuery library that
+addresses the following Cat User Story:
+
+> As a cat,
+>
+> I want to be directly under your hand, wherever it happens to be, regardless
+> of what you are doing, all the time
+>
+> So that I epitomize catness.
+> - [@catuserstories](https://twitter.com/catuserstories/status/311275434669142019)
+
+When the jQuery plugin is run, it will insert an `<img/>` tag into the DOM that
+follows the cursor. It prevents all clicks just like a cat gets in your way.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the exception of
