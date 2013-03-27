@@ -3,7 +3,11 @@
 All material herein is Copyright Zendesk 2008-2012, with the exception of
 certain images, whose source is noted below.
 
- * odd_eyed_cat.jpg, [Konstantinos Papakonstantinou](http://www.flickr.com/photos/ihasb33r/2573196546/)
+ * `odd_eyed_cat.jpg`, [Konstantinos Papakonstantinou](http://www.flickr.com/photos/ihasb33r/2573196546/)
+ * `broken_wrench.jpg`, [S. Benno](http://www.flickr.com/photos/9115274@N05/577382652/)
+ * `cheetah.jpg`, [ShootNFish](http://www.flickr.com/photos/geyring/5290188093/)
+ * `polyglot.jpg`, [Anya Quinn](http://www.flickr.com/photos/quinnanya/5383598076/)
+ * `turkish_tea.jpg`, [mbgrigby](http://www.flickr.com/photos/mbgrigby/5161070259/)
 
 ## Links
 
