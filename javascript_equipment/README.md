@@ -224,14 +224,15 @@ Then, change `script/compile` to use Browserify for the compilation:
 
 ## Copyright
 
-All material herein is Copyright Zendesk 2008-2012, with the exception of
-certain images, whose source is noted below.
+All material herein is Copyright Zendesk 2008-2012, with the following
+exceptions:
 
- * `odd_eyed_cat.jpg`, [Konstantinos Papakonstantinou](http://www.flickr.com/photos/ihasb33r/2573196546/)
- * `broken_wrench.jpg`, [S. Benno](http://www.flickr.com/photos/9115274@N05/577382652/)
- * `cheetah.jpg`, [ShootNFish](http://www.flickr.com/photos/geyring/5290188093/)
- * `polyglot.jpg`, [Anya Quinn](http://www.flickr.com/photos/quinnanya/5383598076/)
- * `turkish_tea.jpg`, [mbgrigby](http://www.flickr.com/photos/mbgrigby/5161070259/)
+ * `assets/odd_eyed_cat.jpg`, [Konstantinos Papakonstantinou](http://www.flickr.com/photos/ihasb33r/2573196546/)
+ * `assets/broken_wrench.jpg`, [S. Benno](http://www.flickr.com/photos/9115274@N05/577382652/)
+ * `assets/cheetah.jpg`, [ShootNFish](http://www.flickr.com/photos/geyring/5290188093/)
+ * `assets/polyglot.jpg`, [Anya Quinn](http://www.flickr.com/photos/quinnanya/5383598076/)
+ * `assets/turkish_tea.jpg`, [mbgrigby](http://www.flickr.com/photos/mbgrigby/5161070259/)
+ * `script/commonjs_shim.js`, [Alex MacCaw](https://github.com/maccman/sprockets-commonjs/blob/master/lib/assets/javascripts/sprockets/commonjs.js)
 
 ## Links
 
