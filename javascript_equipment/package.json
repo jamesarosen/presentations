@@ -2,6 +2,7 @@
   "name": "JSTools",
   "version": "1.0.0",
   "devDependencies": {
+    "jshint":     "~1.1.0",
     "browserify": "~2.8.0"
   }
 }
