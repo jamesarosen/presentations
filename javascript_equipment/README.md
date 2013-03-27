@@ -257,3 +257,4 @@ exceptions:
  * https://npmjs.org/package/browserify
  * https://github.com/gruntjs/grunt-contrib-jshint
  * https://github.com/mixu/gluejs
+ * http://addyosmani.com/blog/devtools-extensions-for-webapp-developers/
