@@ -1,3 +1,26 @@
+## Tools Philosophy
+
+The most important feature of your tools is that the work. Broken tools are
+worse than no tools. After correctness, speed is of utmost concern. You'll be
+bulding, checking, testing, packaging, and deploying your code hundreds if not
+thousands of times per day.
+
+Of course, there may be parts of the process that are extremely difficult to
+speed up. For those cases, I find it best to *use* the slowness as a feature.
+Instead of impatiently staring at a slow test suite, go enjoy a cup of çai or
+listen to some music. In five (or thirty) minutes, you can come back to your
+work in a better state of mind.
+
+I often see people recreate existing tools in new languages. There are many
+good reasons to do this, but your tools don't *have* to be in the same language
+as your code.
+
+Putting these guidelines together, I arrive at the following philosophy:
+*build your tools in the fastest language that you're likely to get right.* This
+talk will start off running tools from the (Unix) command line. As the tasks get
+increasingly complex, we will move up the abstraction stack through shell
+scripting, Make, and Grunt.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the exception of
