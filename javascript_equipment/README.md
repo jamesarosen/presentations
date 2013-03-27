@@ -37,6 +37,30 @@ addresses the following Cat User Story:
 When the jQuery plugin is run, it will insert an `<img/>` tag into the DOM that
 follows the cursor. It prevents all clicks just like a cat gets in your way.
 
+## JSHint
+
+JSHint is the *sine qua non* of JavaScript development. It will do more than
+any other tool to help you write correct, maintainable code. After installing
+[NodeJS](http://nodejs.org/), install JSHint with `npm install -g jshint`. Run
+JSHint on a single file with `jshint assets/insistent_cat.js`.
+
+If you are working on multiple projects, there will come a time when you want
+to use a different version of JSHint on each one. To do so, install JSHint
+*locally* instead of *globally*. Add the following to the `package.json` file
+in your project:
+
+    "devDependencies": {
+      "jshint": "~1.1.0"
+    }
+
+Then install with `npm install`, ignoring the warning about `-g`. To use the
+local version from the commandline, run
+`node_modules/jshint/bin/hint myFile.js`.
+
+For bonus points, work JSHint into your editor of choice; you can bind it to
+a keyboard shortcut or have it run every time a file is saved. Additionally,
+you can add it to a git pre-commit hook and your continuous integration server.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the exception of
