@@ -204,6 +204,24 @@ to a global manually. We could fix the first with `sed` and the second with a
 more sophisticated `script/commonjs2browser`, but it would be easy to introduce
 bugs. It's time to move out of the realm of shell scripting.
 
+To install Browserify locally, add `"browserify": "~2.8.0"` to the
+`devDependencies` section in your `package.json`, then run `npm install`.
+To convert a collection of CommonJS modules to a browser-friendly package,
+call `browserify` with the "entry-point" module (the one you want to export
+as a global).
+
+Browserify doesn't have a way to automatically export a module to a global, so
+we'll create a `src/main.js`:
+
+    window.InsistentCat = require('./cat_follower');
+
+Then, change `script/compile` to use Browserify for the compilation:
+
+    #!/bin/sh
+    ./node_modules/browserify/bin/cmd.js \
+      src/main.js \
+      > assets/insistent_cat.js
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the exception of
