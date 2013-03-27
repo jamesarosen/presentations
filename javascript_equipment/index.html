@@ -224,7 +224,7 @@ find . -name *.js | xargs node_modules/jshint/bin/hint</pre>
       <header>Problem!</header>
       <pre>(function(window, $, undefined) {
 
-  // contents go gere
+  // contents go here
 
   window.InsistentCat = InsistentCat;
 
@@ -235,11 +235,12 @@ find . -name *.js | xargs node_modules/jshint/bin/hint</pre>
       <header>"Solution"</header>
       <p>In <code>script/build</code>:</p>
       <pre>#!/bin/sh
-cat src/header.js
-  src/cat_image.js
-  src/cat_follower.js
-  src/footer.js
-  > assets/insistent_cat.js</pre>
+outfile="build/library.js"
+echo "(function(window, $, undefined) {"    >  $outfile;
+cat  src/cat_image.js                       >> $outfile;
+cat  src/cat_follower.js                    >> $outfile;
+echo "window.InsistentCat = InsistentCat;"  >> $outfile;
+echo "}(this, this.jQuery));"               >> $outfile;</pre>
     </section>
 
     <section class="slide chapter green">

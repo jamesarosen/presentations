@@ -61,6 +61,53 @@ For bonus points, work JSHint into your editor of choice; you can bind it to
 a keyboard shortcut or have it run every time a file is saved. Additionally,
 you can add it to a git pre-commit hook and your continuous integration server.
 
+## Working with Multiple Files
+
+As your project grows, you'll want to break it up into multiple files. As soon
+as you do, you'll need two things:
+
+ 1. a way to run your checks (JSHint, unit tests, etc.) on each file
+ 1. a way to compile the files into one deliverable unit (at least for
+    browser libraries)
+
+We can address (1) by adding `find` and `xargs` to our toolset:
+
+    find src/ -name *.js | xargs node_modules/jshint/bin/hint
+
+This command is getting pretty complex, though. We'll move it to a shell script
+in `script/jshint`
+
+    #!/bin/sh
+    find src/ -name *.js | xargs node_modules/jshint/bin/hint
+
+Next, we'll use `cat` to concatenate the source files:
+
+    cat src/file1.js \
+        src/file2.js \
+        > build/library.js
+
+We'll put this in `script/compile`. There's a problem with using `cat` for
+browser projects, though. You'll want to wrap your code in an
+<abbr title="Immediately-Invoked Function Expression">IIFE</abbr> so you don't
+pollute the global namespace:
+
+    (function(window, $) {
+      // code
+    }(this, this.jQuery));
+
+The easiest thing that could work would be using `echo` to add the header and
+footer:
+
+    #!/bin/sh
+    outfile="build/library.js"
+    echo "(function(window, $) {"   >  $outfile;
+    cat  src/file1.js               >> $outfile;
+    cat  src/file2.js               >> $outfile;
+    echo "}(this, this.jQuery));"   >> $outfile;
+
+This is sufficient for projects with just a couple of files; more complex
+projects can benefit from a module system.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the exception of
