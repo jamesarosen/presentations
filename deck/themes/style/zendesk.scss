@@ -85,7 +85,7 @@ $zendesk-green: #78A300;
       }
     }
 
-    pre em { color: rgb(195,81,22); font-style: normal; }
+    pre, code { em { color: rgb(195,81,22); font-style: normal; } }
 
     figure {
       text-align: center;
