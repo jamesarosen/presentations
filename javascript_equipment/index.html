@@ -523,6 +523,47 @@ $(LINTED_JS_FILES): <em>$(LINT_FREE_DIR)/%.js : $(SRC_DIR)/%.js</em> $(LINT_FREE
   <em>-rm -rf $(LINT_FREE_DIR)</em></pre>
     </section>
 
+    <section class="slide chapter green">
+      <h1>Chapter 6b: Rake</h1>
+    </section>
+
+    <section class='slide'>
+      <header>Rake: <code>:default</code> task</header>
+      <pre class='slide'><em>desc</em> 'Build the InsistentCat Library'
+task :build 'assets/insistent_cat.js'</pre>
+      <pre class='slide'>task :default => :build</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Rake: file task</header>
+      <pre>file 'assets/insistent_cat.js' => <em>LINT_FREE_FILES</em> do |t|
+  browserify = 'node_modules/browserify/bin/cmd.js'
+  main       = 'src/main.js'
+  <em>sh</em> "#{browserify} #{main} > <em>#{t.name}</em>"
+end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Rake: Lint-Free Files</header>
+      <pre class='slide'>def lint_free_file(source)
+  source.sub %r{^#{SRC_DIR}}, LINT_FREE_DIR
+end</pre>
+      <pre class='slide'>LINTED_JS_FILES = JS_FILES.
+  map { |f| lint_free_file(f) }</pre>
+</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Rake: Lint-Free File Tasks</header>
+      <pre>JS_FILES.each do |f|
+  file <em>lint_free_file(f) => [ f, LINT_FREE_DIR ]</em> do |task|
+    jshint = 'node_modules/jshint/bin/jshint'
+    sh "#{jshint} #{<em>task.prerequisites.first</em>}"
+    touch task.name
+  end
+end</pre>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>

@@ -356,6 +356,60 @@ If we then run `make` (or `make build`) again, it doesn't need to do anything:
     $ make
     make: Nothing to be done for `build'.
 
+## Rake
+
+Many find `Makefile`s to be a bit tricky, particularly when dealing with complex
+file mappings. As always, feel free to move to a higher-level language. The
+`Makefile` from the previous section translates into `Rake` as follows:
+
+    require 'rake/clean'
+
+    SRC_DIR         = 'src'
+    LINT_FREE_DIR   = 'tmp/lint_free'
+    OUT_FILE        = 'assets/insistent_cat.js'
+
+    def lint_free_file(source)
+      source.sub %r{^#{SRC_DIR}}, LINT_FREE_DIR
+    end
+
+    JS_FILES        = FileList["#{SRC_DIR}/**/*.js"]
+    LINTED_JS_FILES = JS_FILES.map { |f| lint_free_file(f) }
+
+    CLEAN.include OUT_FILE, LINT_FREE_DIR
+
+    task :default => :dist
+
+    desc 'Build the InsistentCat library'
+    task :dist => OUT_FILE
+
+    file OUT_FILE => :jshint do |task|
+      sh "node_modules/browserify/bin/cmd.js #{SRC_DIR}/main.js > #{task.name}"
+    end
+
+    desc 'Run JSHint on all source files'
+    task :jshint => LINTED_JS_FILES
+
+    JS_FILES.each do |f|
+      file lint_free_file(f) => [ f, LINT_FREE_DIR ] do |task|
+        sh "node_modules/jshint/bin/jshint #{task.prerequisites.first}"
+        touch task.name
+      end
+    end
+
+    directory LINT_FREE_DIR
+
+Some items of note:
+
+ * We extract the `lint_free_file` function to avoid defining the mapping from
+   source file to lint-free marker twice.
+ * We use `desc` to give public (as opposed to internal) tasks a nice
+   descriptiong when running `rake -T`.
+ * Rake has a `rule` directive much like Make's `rule : dest : source`, but
+   it is rarely used. Instead, we use the dynamic nature of Ruby to iteratively
+   define tasks.
+ * Shell commands aren't quite a first-class citizen in Rake, but they're quite
+   close. Rake provides `sh`, `touch`, `cp`, `rm`, `rm_rf`, and much more.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the following
