@@ -222,6 +222,140 @@ Then, change `script/compile` to use Browserify for the compilation:
       src/main.js \
       > assets/insistent_cat.js
 
+## Make
+
+Using shell scripts for our build system works, but we're starting to outgrow
+them. Let's bring in a dedicated build tool. You could use
+[Jake](https://npmjs.org/package/jake) (JavaScript),
+[Paver](http://paver.github.com/paver/) (Python), or
+[Rake](http://rake.rubyforge.org/) (Ruby), but I'm going to start with
+Make here. My favorite thing about Make is that shell commands are a
+first-class citizen, so it's easy to work with tools written in any language.
+
+Our build currently has two steps:
+
+ 1. Run JSHint on `src/*.js`
+ 1. If that passes, run `browserify` on `src/main.js`
+
+The simplest `Makefile` we could write would be
+
+    build:
+      node_modules/jshint/bin/jshint src
+      node_modules/browserify/bin/cmd.js \
+        src/main.js \
+        > assets/insistent_cat.js
+
+### `.PHONY`
+
+The first improvement would be to add
+
+    .PHONY: build
+
+This tells Make that `build` is a "virtual" target; runing it won't create a
+file named `build`.
+
+### Targets
+
+Breaking the `Makefile` up into multiple targets promotes re-use.
+
+    build: assets/insistent_cat.js
+
+    assets/insistent_cat.js: jshint
+      node_modules/browserify/bin/cmd.js \
+        src/main.js \
+        > assets/insistent_cat.js
+
+    jshint:
+      node_modules/jshint/bin/jshint src
+
+    .PHONY: build jshint
+
+We can still run `make` or `make build` to build `assets/insistent_cat.js`,
+but we can also run `make jshint` to just run the JSHint checks.
+
+### `$@`
+
+Inside a target recipe, `$@` is the target name. We can use this to remove
+some duplication:
+
+    assets/insistent_cat.js: jshint
+      node_modules/browserify/bin/cmd.js \
+        src/main.js \
+        > $@
+
+### Variables
+
+`assets/insistent_cat.js` is still in two places. Let's extract it:
+
+    DIST_JS = assets/insistent_cat.js
+
+    build: $(DIST_JS)
+
+    $(DIST_JS): jshint
+      node_modules/browserify/bin/cmd.js ...
+
+### Cleanup
+
+A `clean` target will make it easy for developers to clean up the repository:
+
+    clean:
+      -rm $(DIST_JS)
+
+    .PHONY: build clean
+
+The `-` at the beginning of the line tells Make that the `rm` command can fail
+without causing the `clean` target to fail. That lets developers run
+`make clean build` even if everything has already been cleaned up.
+
+### Recording Events with Empty Target Files
+
+One of the best features of Make (and other similar tools, like Rake) is that if
+you use targets that represent files, it will automatically skip steps that are
+up-to-date based on file `mtime`s. We can use this to speed up our build times.
+Instead of running JSHint on *every* input file every time, we only need to run
+it on the files that have changed. For each file in `src/`, we `touch`
+a corresponding file in `tmp/lint_free/` to mark it as lint-free.
+
+    SRC_DIR         = src
+    LINT_FREE_DIR   = tmp/lint_free
+
+    JS_FILES        := $(wildcard $(SRC_DIR)/*.js)
+    LINTED_JS_FILES := $(JS_FILES:$(SRC_DIR)/%=$(LINT_FREE_DIR)/%)
+
+    $(LINTED_JS_FILES): $(LINT_FREE_DIR)/%.js : $(SRC_DIR)/%.js $(LINT_FREE_DIR)
+      node_modules/jshint/bin/jshint $<
+      touch $@
+
+    $(LINT_FREE_DIR):
+      mkdir -p $@
+
+    clean:
+      -rm $(DIST_JS)
+      -rm -rf $(LINT_FREE_DIR)
+
+There's a lot of new stuff here. `JS_FILES` is the list of JS files in `src/`;
+`LINTED_JS_FILES` is the corresponding list in `tmp/lint_free/`. We then define
+a rule for turning the former into the latter. The special variable `$<` is the
+rule's first dependency -- here, the file in `src/` that we're checking.
+
+We'll run `make clean build` once:
+
+    $ make clean build
+    rm -rf tmp/lint_free
+    mkdir -p tmp/lint_free
+    node_modules/jshint/bin/jshint src/cat_follower.js
+    touch tmp/lint_free/cat_follower.js
+    node_modules/jshint/bin/jshint src/cat_image.js
+    touch tmp/lint_free/cat_image.js
+    node_modules/jshint/bin/jshint src/main.js
+    touch tmp/lint_free/main.js
+    node_modules/browserify/bin/cmd.js tmp/lint_free/main.js > assets/insistent_cat.js
+
+If we then run `make` (or `make build`) again, it doesn't need to do anything:
+
+    $ make
+    make: Nothing to be done for `build'.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the following
