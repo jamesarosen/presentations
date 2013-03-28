@@ -7,7 +7,7 @@ OUT_FILE        = assets/insistent_cat.js
 build: $(OUT_FILE)
 
 $(OUT_FILE): $(LINTED_JS_FILES)
-	node_modules/browserify/bin/cmd.js $(LINT_FREE_DIR)/main.js > $@
+	node_modules/browserify/bin/cmd.js $(SRC_DIR)/main.js > $@
 
 $(LINTED_JS_FILES): $(LINT_FREE_DIR)/%.js : $(SRC_DIR)/%.js $(LINT_FREE_DIR)
 	node_modules/jshint/bin/jshint $<
