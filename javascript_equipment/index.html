@@ -454,8 +454,12 @@ echo "$(script/cjs2browser src/cat_follower.js)" >> $outfile;
     </section>
 
     <section class='slide'>
-      <header><code>%@</code></header>
-      <pre><em>assets/insistent_cat.js</em>: jshint
+      <header><code>$@</code></header>
+      <pre class='slide'><em>assets/insistent_cat.js</em>: jshint
+  node_modules/browserify/bin/cmd.js \
+    src/main.js \
+    > <em>assets/insistent_cat.js</em></pre>
+      <pre class='slide'>assets/insistent_cat.js: jshint
   node_modules/browserify/bin/cmd.js \
     src/main.js \
     > <em>$@</em></pre>
