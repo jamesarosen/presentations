@@ -509,8 +509,10 @@ $(LINTED_JS_FILES): <em>$(LINT_FREE_DIR)/%.js : $(SRC_DIR)/%.js</em> $(LINT_FREE
 
     <section class='slide'>
       <header>Compile after JSHint</header>
-      <pre>$(DIST_JS): $(LINTED_JS_FILES)
-  ...</pre>
+      <pre>$(DIST_JS): <em>$(LINTED_JS_FILES)</em>
+  node_modules/browserify/bin/cmd.js \
+    src/main.js \
+    > $@</pre>
     </section>
 
     <section class='slide'>
