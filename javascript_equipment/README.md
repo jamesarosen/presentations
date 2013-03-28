@@ -55,7 +55,7 @@ in your project:
 
 Then install with `npm install`, ignoring the warning about `-g`. To use the
 local version from the commandline, run
-`node_modules/jshint/bin/hint myFile.js`.
+`node_modules/jshint/bin/jshint myFile.js`.
 
 For bonus points, work JSHint into your editor of choice; you can bind it to
 a keyboard shortcut or have it run every time a file is saved. Additionally,
@@ -72,13 +72,13 @@ as you do, you'll need two things:
 
 We can address (1) by adding `find` and `xargs` to our toolset:
 
-    find src/ -name *.js | xargs node_modules/jshint/bin/hint
+    find src/ -name *.js | xargs node_modules/jshint/bin/jshint
 
 This command is getting pretty complex, though. We'll move it to a shell script
 in `script/jshint`
 
     #!/bin/sh
-    find src/ -name *.js | xargs node_modules/jshint/bin/hint
+    find src/ -name *.js | xargs node_modules/jshint/bin/jshint
 
 Next, we'll use `cat` to concatenate the source files:
 
