@@ -467,10 +467,12 @@ echo "$(script/cjs2browser src/cat_follower.js)" >> $outfile;
 
     <section class='slide'>
       <header>Variables</header>
-      <pre><em>DIST_JS</em> = assets/insistent_cat.js
+      <pre class='slide'>build: <em>assets/insistent_cat.js</em>
+
+<em>assets/insistent_cat.js</em>: jshint</pre>
+      <pre class='slide'><em>DIST_JS</em> = assets/insistent_cat.js
 build: <em>$(DIST_JS)</em>
-<em>$(DIST_JS)</em>: jshint
-  node_modules/browserify/bin/cmd.js</pre>
+<em>$(DIST_JS)</em>: jshint</pre>
     </section>
 
     <section class='slide'>
