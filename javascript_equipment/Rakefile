@@ -1,0 +1,35 @@
+require 'rake/clean'
+
+SRC_DIR         = 'src'
+LINT_FREE_DIR   = 'tmp/lint_free'
+OUT_FILE        = 'assets/insistent_cat.js'
+
+def lint_free_file(source)
+  source.sub %r{^#{SRC_DIR}}, LINT_FREE_DIR
+end
+
+JS_FILES        = FileList["#{SRC_DIR}/**/*.js"]
+LINTED_JS_FILES = JS_FILES.map { |f| lint_free_file(f) }
+
+CLEAN.include OUT_FILE, LINT_FREE_DIR
+
+task :default => :dist
+
+desc 'Build the InsistentCat library'
+task :dist => OUT_FILE
+
+file OUT_FILE => :jshint do |task|
+  sh "node_modules/browserify/bin/cmd.js #{SRC_DIR}/main.js > #{task.name}"
+end
+
+desc 'Run JSHint on all source files'
+task :jshint => LINTED_JS_FILES
+
+JS_FILES.each do |f|
+  file lint_free_file(f) => [ f, LINT_FREE_DIR ] do |task|
+    sh "node_modules/jshint/bin/jshint #{task.prerequisites.first}"
+    touch task.name
+  end
+end
+
+directory LINT_FREE_DIR
