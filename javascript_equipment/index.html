@@ -384,6 +384,120 @@ done
   > assets/insistent_cat.js</pre>
     </section>
 
+    <section class="slide chapter green">
+      <h1>Chapter 6: Make</h1>
+    </section>
+
+    <section class='slide'>
+      <header>Or...</header>
+      <p>Rake, Jake, Paver, etc.</p>
+    </section>
+
+    <section class='slide'>
+      <header>Power of Make</header>
+      <ul>
+        <li class='slide'>Decomposition</li>
+        <li class='slide'>Use `mtime` to avoid work</li>
+        <li class='slide'>First-class shell</li>
+      </ul>
+    </section>
+
+    <section class='slide'>
+      <header>Start Simple</header>
+      <pre>build:
+  node_modules/jshint/bin/jshint src
+
+  node_modules/browserify/bin/cmd.js \
+    src/main.js \
+    > assets/insistent_cat.js
+    </section>
+
+    <section class='slide'>
+      <header><code>.PHONY</code></header>
+      <pre>.PHONY: build</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Dependencies</header>
+      <pre>build: assets/insistent_cat.js</pre>
+    </section>
+
+    <section class='slide'>
+      <header>File Target</header>
+      <pre>assets/insistent_cat.js: jshint
+  node_modules/browserify/bin/cmd.js \
+    src/main.js \
+    > assets/insistent_cat.js</pre>
+    </section>
+
+    <section class='slide'>
+      <header>File Target Dependency</header>
+      <pre>jshint:
+  node_modules/jshint/bin/jshint src
+
+.PHONY: build jshint</pre>
+    </section>
+
+    <section class='slide'>
+      <header><code>%@</code></header>
+      <pre><em>assets/insistent_cat.js</em>: jshint
+  node_modules/browserify/bin/cmd.js \
+    src/main.js \
+    > <em>$@</em></pre>
+    </section>
+
+    <section class='slide'>
+      <header>Variables</header>
+      <pre><em>DIST_JS</em> = assets/insistent_cat.js
+build: <em>$(DIST_JS)</em>
+<em>$(DIST_JS)</em>: jshint
+  node_modules/browserify/bin/cmd.js</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Cleanup</header>
+      <pre>clean:
+  -rm $(DIST_JS)
+.PHONY: build clean
+    </section>
+
+    <section class='slide'>
+      <header>Too Much Work!</header>
+      <figure>
+        <img src="./assets/lazy_lizard.jpg" />
+        <figcaption><cite>
+          <a href='http://www.flickr.com/photos/kpcauchi/5376768095/'>
+            http://www.flickr.com/photos/kpcauchi/5376768095/
+          </a>
+        </cite></figcaption>
+      </figure>
+    </section>
+
+    <section class='slide'>
+      <header>Lint-Free File Marker</header>
+      <pre>SRC_DIR         = src
+LINT_FREE_DIR   = tmp/lint_free
+JS_FILES        := $(wildcard $(SRC_DIR)/*.js)
+LINTED_JS_FILES := $(JS_FILES:$(SRC_DIR)/%=$(LINT_FREE_DIR)/%)
+
+$(LINTED_JS_FILES): <em>$(LINT_FREE_DIR)/%.js : $(SRC_DIR)/%.js</em> $(LINT_FREE_DIR)
+  node_modules/jshint/bin/jshint $&lt;
+  <em>touch $@</em></pre>
+    </section>
+
+    <section class='slide'>
+      <header>Compile after JSHint</header>
+      <pre>$(DIST_JS): $(LINTED_JS_FILES)
+  ...</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Clean up marker files</header>
+      <pre>clean:
+  -rm $(DIST_JS)
+  -rm -rf $(LINT_FREE_DIR)</pre>
+    </section>
+
     <!-- deck.status snippet -->
     <p class="deck-status">
       <span class="deck-status-current"></span>

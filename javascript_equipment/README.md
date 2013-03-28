@@ -367,6 +367,7 @@ exceptions:
  * `assets/polyglot.jpg`, [Anya Quinn](http://www.flickr.com/photos/quinnanya/5383598076/)
  * `assets/turkish_tea.jpg`, [mbgrigby](http://www.flickr.com/photos/mbgrigby/5161070259/)
  * `assets/motorcycle_stunt.jpg`, [Fernando de Sousa](http://www.flickr.com/photos/fernando/3381914087/)
+ * `assets/lazy_lizard.jpg`, [Kevin Cauchy](http://www.flickr.com/photos/kpcauchi/5376768095/)
  * `script/commonjs_shim.js`, [Alex MacCaw](https://github.com/maccman/sprockets-commonjs/blob/master/lib/assets/javascripts/sprockets/commonjs.js)
 
 ## Links
