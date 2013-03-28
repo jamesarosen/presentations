@@ -227,14 +227,14 @@ Expected an assignment or function call and instead saw an expression.</pre>
 
     <section class='slide'>
       <header>JSHint: Multiple Files</header>
-      <pre><em>find . -name *.js | xargs</em> node_modules/jshint/bin/jshint</pre>
+      <pre>node_modules/jshint/bin/jshint src</pre>
     </section>
 
     <section class='slide'>
       <header>Refactor</header>
       <p>In <code>script/hint</code>:</p>
       <pre>#!/bin/sh
-find . -name *.js | xargs node_modules/jshint/bin/jshint</pre>
+node_modules/jshint/bin/jshint src</pre>
     </section>
 
     <section class='slide'>
@@ -357,22 +357,10 @@ echo "});";</pre>
     <section class='slide'>
       <header>Browserification: Build Script</header>
       <pre>outfile="assets/insistent_cat.js"
-find src -name *.js | xargs node_modules/jshint/bin/jshint || exit 1;
+node_modules/jshint/bin/jshint src || exit 1;
 cat  script/commonjs_shim.js > $outfile;
 echo "$(script/cjs2browser src/cat_image.js)" >> $outfile;
 echo "$(script/cjs2browser src/cat_follower.js)" >> $outfile;
-</pre>
-    </section>
-
-    <section class='slide'>
-      <header>Refactor</header>
-      <pre>outfile="assets/insistent_cat.js"
-js_files=$(find src -name *.js)
-echo "$js_files" | xargs jshint || exit 1;
-cat  script/commonjs_shim.js > $outfile;
-for js_file in $js_files; do
-  echo "$(script/cjs2browser $js_file)" >> $outfile;
-done
 </pre>
     </section>
 
