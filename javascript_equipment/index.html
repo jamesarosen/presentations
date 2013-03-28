@@ -477,9 +477,10 @@ build: <em>$(DIST_JS)</em>
 
     <section class='slide'>
       <header>Cleanup</header>
-      <pre>clean:
+      <pre class='slide'>clean:
   -rm $(DIST_JS)
-.PHONY: build clean
+.PHONY: build clean</pre>
+      <p class='slide'><code><em>-</em></code> prefix: can fail
     </section>
 
     <section class='slide'>
