@@ -184,7 +184,7 @@ assets/insistent_cat.js: line 21, col 53, Expected an assignment or function cal
 
     <section class='slide'>
       <header>Run Locally</header>
-      <pre>node_modules/jshint/bin/hint myFile.js</pre>
+      <pre><em>node_modules/jshint/bin/hint</em> myFile.js</pre>
     </section>
 
     <section class='slide'>
@@ -203,7 +203,7 @@ assets/insistent_cat.js: line 21, col 53, Expected an assignment or function cal
 
     <section class='slide'>
       <header>JSHint: Multiple Files</header>
-      <pre>find . -name *.js | xargs node_modules/jshint/bin/hint</pre>
+      <pre><em>find . -name *.js | xargs</em> node_modules/jshint/bin/hint</pre>
     </section>
 
     <section class='slide'>
@@ -262,7 +262,7 @@ echo "}(this, this.jQuery));"               >> $outfile;</pre>
     <section class='slide'>
       <header>Export</header>
       <pre>// in cat_image.js:
-module.exports = function buildCatImage(src, options) {
+<em>module.exports</em> = function buildCatImage(src, options) {
   // ...
 };</pre>
     </section>
@@ -270,7 +270,7 @@ module.exports = function buildCatImage(src, options) {
     <section class='slide'>
       <header>Import</header>
       <pre>// in cat_follower.js:
-var buildImage = require('./cat_image');
+var <em>buildImage = require('./cat_image')</em>;
 // ...
 var catImage = buildImage('path/to/cat.png', { width: '20px' });
 </pre>
