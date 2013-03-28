@@ -353,9 +353,9 @@ require.define = function(bundle) {
 
 filename="$1";
 
-echo "require.define(\"${filename}\","
+echo <em>"require.define(\"${filename}\","</em>
 echo "  function(exports, require, module) {";
-cat  $filename;
+<em>cat  $filename;</em>
 echo "});";</pre>
     </section>
 
