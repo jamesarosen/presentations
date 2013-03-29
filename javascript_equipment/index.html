@@ -359,9 +359,10 @@ echo "});";</pre>
       <header>Browserification: Build Script</header>
       <pre>outfile="assets/insistent_cat.js"
 node_modules/jshint/bin/jshint src || exit 1;
-cat  script/commonjs_shim.js > $outfile;
-echo "$(script/cjs2browser src/cat_image.js)" >> $outfile;
-echo "$(script/cjs2browser src/cat_follower.js)" >> $outfile;
+
+cat  <em>script/commonjs_shim.js</em> > $outfile;
+echo "$(<em>script/cjs2browser src/cat_image.js</em>)" >> $outfile;
+echo "$(<em>script/cjs2browser src/cat_follower.js</em>)" >> $outfile;
 </pre>
     </section>
 
