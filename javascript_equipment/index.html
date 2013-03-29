@@ -545,10 +545,10 @@ task :build => 'assets/insistent_cat.js'</pre>
 
     <section class='slide'>
       <header>Rake: file task</header>
-      <pre>file 'assets/insistent_cat.js' => <em>LINT_FREE_FILES</em> do |t|
+      <pre>file 'assets/insistent_cat.js' => <em>LINT_FREE_FILES</em> do |task|
   browserify = 'node_modules/browserify/bin/cmd.js'
   main       = 'src/main.js'
-  <em>sh</em> "#{browserify} #{main} > <em>#{t.name}</em>"
+  <em>sh</em> "#{browserify} #{main} > <em>#{task.name}</em>"
 end</pre>
     </section>
 
