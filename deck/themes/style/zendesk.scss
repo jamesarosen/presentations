@@ -91,6 +91,13 @@ $zendesk-green: #78A300;
       text-align: center;
       figcaption { color: #888; font-size: 85%; }
     }
+
+    .side-by-side {
+      text-align: center;
+      figure { display: inline-block; }
+      figure img { max-height: 50%; }
+      figure + figure { margin-left: 2em; }
+    }
   }
 
   > .slide {
