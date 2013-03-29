@@ -101,6 +101,7 @@
       <p class='slide'>Shell Scripting</p>
       <p class='slide'>CommonJS &amp; Browserify</p>
       <p class='slide'>Make &amp; Rake</p>
+      <p class='slide'>File Watchers</p>
     </section>
 
     <section class="slide chapter green">
@@ -570,6 +571,65 @@ end</pre>
       <p class='slide'><code>=> test_file</code></p>
       <p class='slide'><code>=> file_under_test</code></p>
       <p class='slide'><code>=> dependencies</code></p>
+    </section>
+
+    <section class="slide chapter green">
+      <h1>Chapter 7: File Watching</h1>
+    </section>
+
+    <section class='slide'>
+      <header>The Watcher</header>
+      <figure>
+        <img src="./assets/rupert_giles.jpg" />
+        <figcaption><cite>
+          20th Century Fox Television
+        </cite></figcaption>
+      </figure>
+    </section>
+
+    <section class='slide'>
+      <header>Watchdog: Fail</header>
+      <div class='side-by-side'>
+        <figure>
+          <img src="./assets/hamster.jpg" />
+          <figcaption><cite>
+            <a href="http://www.flickr.com/photos/ianhampton/2317616360/">
+              http://www.flickr.com/photos/ianhampton/2317616360/
+            </a>
+          </cite></figcaption>
+        </figure>
+        <figure>
+          <img src="./assets/elderberries.jpg" />
+          <figcaption><cite>
+            <a href='http://www.flickr.com/photos/ibboard/8542522414/'>
+              http://www.flickr.com/photos/ibboard/8542522414/
+            </a>
+          </cite></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class='slide'>
+      <header>Guard: Installation</header>
+      <pre>gem install guard</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Guard: Configuration</header>
+      <pre>guard :shell do
+  watch(%r{^src/.*\.js}) { system 'rake', 'dist' }
+end</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Guard: Running</header>
+      <p class='slide'><code>guard</code></p>
+      <p class='slide'><code>guard <em>&amp;</em></code></p>
+    </section>
+
+    <section class='slide'>
+      <header>Guard: Extra Credit</header>
+      <p>Growl notifications</p>
     </section>
 
     <!-- deck.status snippet -->

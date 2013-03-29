@@ -18,7 +18,7 @@ task :default => :dist
 desc 'Build the InsistentCat library'
 task :dist => OUT_FILE
 
-file OUT_FILE => :jshint do |task|
+file OUT_FILE => LINTED_JS_FILES do |task|
   sh "node_modules/browserify/bin/cmd.js #{SRC_DIR}/main.js > #{task.name}"
 end
 

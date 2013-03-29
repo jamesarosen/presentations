@@ -417,6 +417,37 @@ is more involved since the marker file's dependencies include not only the test,
 but the class under test and all of its dependencies. This is a situation where
 Rake can prove its worth over Make.
 
+## File Watchers
+
+Now we have a build suite that does the least work possible and runs quickly.
+We can make the computer do more work for us by having it watch the file
+system for changes and re-run our build. Modern operating systems emit events
+when the file system changes, so these watchers don't have to waste energy
+constantly scanning the directory. On OS X, the event system is `fsevent`; on
+many Unixes, it's `inotify`.
+
+There are many different programs that can run code on file changes, including
+the OS X app [LiveReload](http://feedback.livereload.com/), the Ruby gem
+[guard](https://rubygems.org/gems/guard), and the node module
+[nodemon](https://npmjs.org/package/nodemon), and Python's
+[Watchdog](https://github.com/gorakhargosh/watchdog).
+
+Guard has a number of wonderful features. It's easy to map different file
+patterns to different commands. Commands can be in Ruby, but shelling out is
+very easy. Lastly, it integrates with Growl so you get notifications of success
+and failure without switching to the terminal. One downside is that Guard
+*requires* a configuration file, unlike nodemon and Watchdog.
+
+To install Guard, run `gem install guard guard-shell` or add them to your
+`Gemfile`. Configure Guard in the `Guardfile`:
+
+    guard :shell do
+      watch(%r{^src/.*\.js}) { system 'rake', 'dist' }
+    end
+
+Then run `guard`. For extra credit, run `guard &` to background the process
+and have it log to your shell.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the following
@@ -429,6 +460,9 @@ exceptions:
  * `assets/turkish_tea.jpg`, [mbgrigby](http://www.flickr.com/photos/mbgrigby/5161070259/)
  * `assets/motorcycle_stunt.jpg`, [Fernando de Sousa](http://www.flickr.com/photos/fernando/3381914087/)
  * `assets/lazy_lizard.jpg`, [Kevin Cauchy](http://www.flickr.com/photos/kpcauchi/5376768095/)
+ * `assets/rupert_giles.jpg`, 20th Century Fox Television
+ * `assets/hamster.jpg`, [Ian Hampton](http://www.flickr.com/photos/ianhampton/2317616360/)
+ * `assets/elderberries.jpg`, [IBBoard](http://www.flickr.com/photos/ibboard/8542522414/)
  * `script/commonjs_shim.js`, [Alex MacCaw](https://github.com/maccman/sprockets-commonjs/blob/master/lib/assets/javascripts/sprockets/commonjs.js)
 
 ## Links
