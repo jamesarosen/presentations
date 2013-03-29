@@ -23,6 +23,11 @@ $zendesk-green: #78A300;
   background: #f9f9f9;
 
   .slide {
+    &.inline {
+      display: inline-block;
+      margin-right: 2em;
+    }
+
     code {
       color:#888;
     }
