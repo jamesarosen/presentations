@@ -497,6 +497,15 @@ build: <em>$(DIST_JS)</em>
     </section>
 
     <section class='slide'>
+      <header>Dependency Tree</header>
+      <pre>assets/insistent_cat.js
+  + tmp/lint_free/cat_follower.js
+      + src/cat_follower.js
+  + tmp/lint_free/cat_image.js
+      + src/cat_image.js</pre>
+    </section>
+
+    <section class='slide'>
       <header>Lint-Free File Marker</header>
       <pre>SRC_DIR         = src
 LINT_FREE_DIR   = tmp/lint_free
