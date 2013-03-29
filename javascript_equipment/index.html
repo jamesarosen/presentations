@@ -539,7 +539,7 @@ $(LINTED_JS_FILES): <em>$(LINT_FREE_DIR)/%.js : $(SRC_DIR)/%.js</em> $(LINT_FREE
     <section class='slide'>
       <header>Rake: <code>:default</code> task</header>
       <pre class='slide'><em>desc</em> 'Build the InsistentCat Library'
-task :build 'assets/insistent_cat.js'</pre>
+task :build => 'assets/insistent_cat.js'</pre>
       <pre class='slide'>task :default => :build</pre>
     </section>
 
