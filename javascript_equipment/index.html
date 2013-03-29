@@ -513,7 +513,7 @@ JS_FILES        := $(wildcard $(SRC_DIR)/*.js)
 LINTED_JS_FILES := $(JS_FILES:$(SRC_DIR)/%=$(LINT_FREE_DIR)/%)
 
 $(LINTED_JS_FILES): <em>$(LINT_FREE_DIR)/%.js : $(SRC_DIR)/%.js</em> $(LINT_FREE_DIR)
-  node_modules/jshint/bin/jshint $&lt;
+  node_modules/jshint/bin/jshint <em>$&lt;</em>
   <em>touch $@</em></pre>
     </section>
 
