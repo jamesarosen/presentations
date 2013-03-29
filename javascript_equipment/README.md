@@ -410,6 +410,13 @@ Some items of note:
  * Shell commands aren't quite a first-class citizen in Rake, but they're quite
    close. Rake provides `sh`, `touch`, `cp`, `rm`, `rm_rf`, and much more.
 
+### Rake Extra Credit
+
+For bonus points, use the "marker file" technique for your unit tests. The setup
+is more involved since the marker file's dependencies include not only the test,
+but the class under test and all of its dependencies. This is a situation where
+Rake can prove its worth over Make.
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the following
