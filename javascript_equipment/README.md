@@ -448,6 +448,41 @@ To install Guard, run `gem install guard guard-shell` or add them to your
 Then run `guard`. For extra credit, run `guard &` to background the process
 and have it log to your shell.
 
+## Style Tests
+
+Sometimes, you will find something you would like to improve about your
+codebase, but the change is too large to do all at onece. Some examples from
+Zendesk include
+
+ * `Zendesk.foo` -> `Zendesk.getFoo()` -- laziliy initialize a global
+ * `lib/zendesk/foo.js` -> `lib/zendesk/foo.js.commonjs` -- use CommonJS
+ * `.property()` -> `.property().volatile()` -- mark all EmberJS properties
+   as volatile or cacheable
+
+In these cases, I like to take the following approach:
+
+ 1. document the change
+ 1. write a Style Test that fails if code is committed that breaks the new rule
+ 1. exclude existing examples from the style test
+ 1. over time, clean up and remove the exclusions
+
+For example, if the team decides that they would like to move everything to
+CommonJS, you might write the following test:
+
+    src_files = Dir['lib/**/*.js']
+
+    grandfathered = [
+      'lib/foo.js',
+      'lib/bar.js'
+    ]
+
+    non_commonjs = (src_files - grandfathered).reject do |file|
+      file =~ /\.js\.commonjs$/
+    end
+
+    assert_equal [], non_commonjs
+
+
 ## Copyright
 
 All material herein is Copyright Zendesk 2008-2012, with the following

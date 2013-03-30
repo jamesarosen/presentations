@@ -96,6 +96,7 @@
       <p class='slide inline'>CommonJS &amp; Browserify</p>
       <p class='slide inline'>Make &amp; Rake</p>
       <p class='slide inline'>File Watchers</p>
+      <p class='slide inline'>Style Tests</p>
       <p class='slide inline'>Dependency Managers</p>
     </section>
 
@@ -643,7 +644,38 @@ end</pre>
     </section>
 
     <section class="slide chapter green">
-      <h1>Chapter 8: Dependency Managers</h1>
+      <h1>Chapter 8: Style Tests</h1>
+    </section>
+
+    <section class='slide'>
+      <header>Style Tests: Value</header>
+      <p>Enforce app-specific standards</p>
+    </section>
+
+    <section class='slide'>
+      <header>Example: Always Use CommonJS</header>
+      <pre>src_files = <em>Dir['lib/**/*.js']</em>
+non_commonjs = src_files.<em>reject</em> do |file|
+  file =~ <em>/\.js\.commonjs$/</em>
+end
+assert_equal [], non_commonjs</pre>
+    </section>
+
+    <section class='slide'>
+      <header>Changing Standards</header>
+      <p class='slide'>Often hard to do all at once</p>
+      <p class='slide'>Tests educate automatically</p>
+    </section>
+
+    <section class='slide'>
+      <header>Example: Grandfathering</header>
+      <pre>src_files = <em>Dir['lib/**/*.js']</em>
+grandfathered = [ 'lib/foo.js', 'lib/bar.js' ]
+non_commonjs = <em>(src_files - grandfathered)</em>.reject...</pre>
+    </section>
+
+    <section class="slide chapter green">
+      <h1>Chapter 9: Dependency Managers</h1>
     </section>
 
     <section class='slide'>
