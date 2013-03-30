@@ -101,7 +101,7 @@
     </section>
 
     <section class="slide chapter green">
-      <h1>Chapter 2: <code>insistent_cat.js</code></h1>
+      <h1>Chapter 2<code class='subtitle'>insistent_cat.js</code></h1>
     </section>
 
     <section class="slide">
@@ -176,8 +176,8 @@ Expected an assignment or function call and instead saw an expression.</pre>
       <header>JSHint Options</header>
       <p class='slide'><code>curly</code>: require <code>{...}</code></p>
       <p class='slide'><code>eqeqeq</code>: require <code>===</code> and <code>!==</code></p>
-      <p class='slide'><code>undef</code>: spot leaked globals</p>
-      <p class='slide'><code>unused</code>: spot extra variables</p>
+      <p class='slide'><code>undef</code>: find leaked globals</p>
+      <p class='slide'><code>unused</code>: find extra variables</p>
       <p class='slide'>
         More at
         <a href="http://jshint.com/docs/#options">http://jshint.com/docs/#options</a>
@@ -220,7 +220,8 @@ Expected an assignment or function call and instead saw an expression.</pre>
 
     <section class='slide'>
       <header>JSHint: Multiple Files</header>
-      <pre>node_modules/jshint/bin/jshint src</pre>
+      <pre class='slide'>node_modules/jshint/bin/jshint src</pre>
+      <pre class='slide'>find . -name *.js | xargs node_modules/jshint/bin/jshint</pre>
     </section>
 
     <section class='slide'>
