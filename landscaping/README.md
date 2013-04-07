@@ -2,6 +2,22 @@
 
 Creating a blissful development environment with Rake.
 
+## Topics
+
+ * Basic DSL: `task`
+ * File tasks: `file`, `directory`, `file_create`
+ * `namespace`
+ * Prerequisites
+ * `timestamp` & `out_of_date?`
+ * Refactoring out or `Rakefile`: `*.rake` vs. `TaskLib`
+ * `rake/clean`, `CLEAN`, & `CLOBBER`
+ * `FileList`
+ * marker files to reduce work
+ * `Rake::Pipeline`
+ * Replacing Sprockets
+   * start with `Rake::Pipeline`
+   * add cache busting; may need to write a library
+
 ## Links
 
  * [Custom Rake Tasks](http://railscasts.com/episodes/66-custom-rake-tasks)
