@@ -9,7 +9,7 @@ Creating a blissful development environment with Rake.
  * `namespace`
  * Prerequisites
  * `timestamp` & `out_of_date?`
- * Refactoring out or `Rakefile`: `*.rake` vs. `TaskLib`
+ * Refactoring out of `Rakefile`: `*.rake` vs. `TaskLib`
  * `rake/clean`, `CLEAN`, & `CLOBBER`
  * `FileList`
  * marker files to reduce work
