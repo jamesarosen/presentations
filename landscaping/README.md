@@ -19,6 +19,14 @@ Creating a blissful development environment with Rake.
    * start with `Rake::Pipeline`
    * add cache busting; may need to write a library
 
+## Images
+
+ * http://www.flickr.com/photos/tanaka_juuyoh/4796737643/
+ * http://www.flickr.com/photos/epsos/3574411866/
+ * http://www.flickr.com/photos/osakajon/38218649/
+ * http://www.flickr.com/photos/dougtone/5911519151/
+ * http://www.flickr.com/photos/ukgardenphotos/7112308833/
+
 ## Links
 
  * [Custom Rake Tasks](http://railscasts.com/episodes/66-custom-rake-tasks)
