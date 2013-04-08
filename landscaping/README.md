@@ -12,6 +12,7 @@ Creating a blissful development environment with Rake.
  * Refactoring out of `Rakefile`: `*.rake` vs. `TaskLib`
  * `rake/clean`, `CLEAN`, & `CLOBBER`
  * `FileList`
+ * `String#pathmap`
  * marker files to reduce work
  * `Rake::Pipeline`
  * Replacing Sprockets
