@@ -68,6 +68,14 @@ $zendesk-green: #78A300;
       }
     }
 
+    th, td {
+      font-size: 1.2em;
+      padding: 30px 30px;
+      text-align: left;
+    }
+
+    tbody tr th:first-child { text-align: right; }
+
     .badge {
       @include rotate(45deg);
 
